@@ -15,8 +15,8 @@ const Notfound = () => {
                     ホームに戻る
                 </a>
             </Content>
+            <Footer />
         </Container>
-        <Footer />
     </>
     );
     

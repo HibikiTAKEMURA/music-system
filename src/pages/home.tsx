@@ -36,8 +36,8 @@ const Home = () => {
                     Click on the Vite and React logos to learn more
                 </p>
             </Content>
+            <Footer />
         </Container>
-        <Footer />
     </>
     );
 };
