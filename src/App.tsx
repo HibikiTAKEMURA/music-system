@@ -2,18 +2,17 @@
 import './App.css'
 import Home from './pages/home'
 import Notfound from './pages/error/notFound'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 
-const APP_NAME: String = "music-system";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
-        <Route path={APP_NAME + '/home'} element={<Home />} />
-        <Route path={APP_NAME + '*'} element={ <Notfound /> } />
+        <Route path="/home" element={<Home />} />
+        <Route path="*" element={<Notfound />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
