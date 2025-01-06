@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "rebuild": "vite build && rm -R docs && cp -r dist docs",
-    "git": "git add . && git commit && git push origin main"
+    "git": "git add . && git commit -m 'Your commit message here' && git push origin main"
   },
   "dependencies": {
     "@types/styled-components": "^5.1.34",

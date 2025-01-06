@@ -11,7 +11,7 @@ const Notfound = () => {
         <Container>
             <Content>
                 <h1>ページが見つかりません</h1>
-                <a className="read-the-docs" href="/home">
+                <a className="read-the-docs" href="/music-system/home">
                     ホームに戻る
                 </a>
             </Content>
