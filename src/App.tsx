@@ -8,7 +8,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/music-system/home" element={<Home />} />
+        <Route path="home" element={<Home />} />
         <Route path="*" element={ <Notfound /> } />
       </Routes>
     </BrowserRouter>
