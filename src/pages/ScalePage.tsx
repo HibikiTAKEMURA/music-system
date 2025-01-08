@@ -48,7 +48,7 @@ const FormSpaceV = styled.div`
 
 const NotesStringStyle = styled.div`
   // width: 300px;
-  width: ${(screenWidth >= 300 ? '300px' : '100%')};
+  width: ${(screenWidth <= 400 ? '300px' : '100%')};
   overflow-x: auto; /* 横方向のスクロールを有効化 */
   overflow-y: hidden; /* 縦方向のスクロールを非表示 */
   white-space: nowrap; /* コンテンツの折り返しを防ぐ */
