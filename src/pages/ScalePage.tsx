@@ -9,7 +9,7 @@ import Content from '../components/atoms/Content';
 const screenWidth = document.documentElement.clientWidth;
 
 const NoteStyle = styled.div`
-
+  padding: 48px 16px;
 `;
 
 const NoteSelectStyle = styled.select`
@@ -36,6 +36,7 @@ const PlayButtonStyle = styled.button`
   font-size: 12pt;
   vertical-align: middle;
   align-items: top;
+  font-weight: 400;
 `;
 
 const FormSpace = styled.span`
@@ -47,7 +48,6 @@ const FormSpaceV = styled.div`
 `;
 
 const NotesStringStyle = styled.div`
-  // width: 300px;
   width: ${(screenWidth <= 400 ? '300px' : '100%')};
   overflow-x: auto; /* 横方向のスクロールを有効化 */
   overflow-y: hidden; /* 縦方向のスクロールを非表示 */
@@ -82,9 +82,9 @@ const ScalePage = () => {
   }, [scaleNotesArray, nowNote, nowOctave]);
 
     return (
-        <Content>
-          <h1>Scale</h1>
+        <Content>        
           <NoteStyle>
+            <h1>Scale</h1>
               <NoteSelectStyle onChange={ (e) => setNowNote(e.target.value) }>
                 {notes.map((note) =>
                   <option value={note} key={note}>{note}</option>
@@ -102,7 +102,7 @@ const ScalePage = () => {
               <FormSpaceV />
               <OctaveSelectStyle onChange={ (e) => setNowOctave(parseInt(e.target.value))}>
                 {octaves.map((octave) =>
-                  <option value={octave} key={octave}>{ octave}</option>
+                  <option value={octave} key={octave}>{octave}</option>
                 )}
               </OctaveSelectStyle>
               <FormSpace />
