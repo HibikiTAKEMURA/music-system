@@ -5,6 +5,7 @@ import styled from "styled-components"
 import { Scale } from "tonal";
 import * as Tone from 'tone'
 import Content from '../components/atoms/Content';
+import { atom, useAtom } from 'jotai'
 
 const screenWidth = document.documentElement.clientWidth;
 
@@ -66,10 +67,14 @@ const scales = ["Ionian", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian
 const synth = new Tone.Synth().toDestination();
 let noteLength = 0.5;
 
+export const nowNoteAtom = atom("C");
+export const nowScaleAtom = atom("ionian");
+export const nowOctaveAtom = atom(4);
+
 const ScalePage = () => {
-  const [nowNote, setNowNote] = useState("C");
-  const [nowScale, setNowScale] = useState("ionian");
-  const [nowOctave, setNowOctave] = useState(4);
+  const [nowNote, setNowNote] = useAtom(nowNoteAtom);
+  const [nowScale, setNowScale] = useAtom(nowScaleAtom);
+  const [nowOctave, setNowOctave] = useAtom(nowOctaveAtom);
   const scaleNotesString = Scale.get(nowNote + " " + nowScale).notes.join(',');
   const scaleNotesArray = Scale.get(nowNote + nowOctave + " " + nowScale).notes;
 
@@ -100,7 +105,7 @@ const ScalePage = () => {
                 <p>{ scaleNotesString }</p>
               </NotesStringStyle>
               <FormSpaceV />
-              <OctaveSelectStyle onChange={ (e) => setNowOctave(parseInt(e.target.value))}>
+              <OctaveSelectStyle defaultValue={4} onChange={ (e) => setNowOctave(parseInt(e.target.value))}>
                 {octaves.map((octave) =>
                   <option value={octave} key={octave}>{octave}</option>
                 )}
