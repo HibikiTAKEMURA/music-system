@@ -5,7 +5,6 @@ import styled from "styled-components"
 import { Scale } from "tonal";
 import * as Tone from 'tone'
 import Content from '../components/atoms/Content';
-import { atom, useAtom } from 'jotai'
 
 const screenWidth = document.documentElement.clientWidth;
 
@@ -16,19 +15,19 @@ const NoteStyle = styled.div`
 const NoteSelectStyle = styled.select`
   width: 48px;
   height: 32px;
-  font-size: 12pt;
+  font-size: 14pt;
 `;
 
 const ScaleSelectStyle = styled.select`
   width: 192px;
   height: 32px;
-  font-size: 12pt;
+  font-size: 13pt;
 `;
 
 const OctaveSelectStyle = styled.select`
   width: 48px;
   height: 36px;
-  font-size: 12pt;
+  font-size: 14pt;
 `;
 
 const PlayButtonStyle = styled.button`
@@ -36,8 +35,8 @@ const PlayButtonStyle = styled.button`
   height: 40px;
   font-size: 12pt;
   vertical-align: middle;
-  align-items: top;
   font-weight: 400;
+  margin-top: 26px;
 `;
 
 const FormSpace = styled.span`
@@ -58,7 +57,24 @@ const NotesStringStyle = styled.div`
     font-size: 26pt;
     font-weight: bold;
   }
+`;
 
+const InputLabel = styled.label`
+  font-size: 16px;
+  margin-bottom: 4px;
+  margin-left: 2px;
+  display: block;
+  text-align: left;
+`;
+
+const InputRow = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;       /* 必要に応じて変更 */
+`;
+
+const InputBox = styled.div`
+  display: block;
 `;
 
 const notes =  ["C","Db","D","Eb","E","F","F#","G","Ab","A","Bb","B",];
@@ -67,15 +83,11 @@ const scales = ["Ionian", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian
 const synth = new Tone.Synth().toDestination();
 let noteLength = 0.5;
 
-export const nowNoteAtom = atom("C");
-export const nowScaleAtom = atom("ionian");
-export const nowOctaveAtom = atom(4);
-
 const ScalePage = () => {
-  const [nowNote, setNowNote] = useAtom(nowNoteAtom);
-  const [nowScale, setNowScale] = useAtom(nowScaleAtom);
-  const [nowOctave, setNowOctave] = useAtom(nowOctaveAtom);
-  const scaleNotesString = Scale.get(nowNote + " " + nowScale).notes.join(',');
+  const [nowNote, setNowNote] = useState("C");
+  const [nowScale, setNowScale] = useState("ionian");
+  const [nowOctave, setNowOctave] = useState(4);
+  const scaleNotesString = Scale.get(nowNote + " " + nowScale).notes.join(' ');
   const scaleNotesArray = Scale.get(nowNote + nowOctave + " " + nowScale).notes;
 
   const playScale = useCallback(() => {
@@ -90,30 +102,46 @@ const ScalePage = () => {
         <Content>        
           <NoteStyle>
             <h1>Scale</h1>
-              <NoteSelectStyle onChange={ (e) => setNowNote(e.target.value) }>
-                {notes.map((note) =>
-                  <option value={note} key={note}>{note}</option>
-                )}
-              </NoteSelectStyle>
+            <InputRow>
+              <InputBox>
+                <InputLabel htmlFor='note'>Note</InputLabel>
+                <NoteSelectStyle id='note' onChange={ (e) => setNowNote(e.target.value) }>
+                  {notes.map((note) =>
+                    <option value={note} key={note}>{note}</option>
+                  )}
+                </NoteSelectStyle>
+              </InputBox>              
               <FormSpace />
-              <ScaleSelectStyle onChange={ (e) => setNowScale(e.target.value)}>
-                {scales.map((scale) =>
-                  <option value={scale} key={scale}>{scale}</option>
-                )}
-              </ScaleSelectStyle>
-              <NotesStringStyle>
-                <p>{ scaleNotesString }</p>
-              </NotesStringStyle>
-              <FormSpaceV />
-              <OctaveSelectStyle defaultValue={4} onChange={ (e) => setNowOctave(parseInt(e.target.value))}>
-                {octaves.map((octave) =>
-                  <option value={octave} key={octave}>{octave}</option>
-                )}
-              </OctaveSelectStyle>
+              <InputBox>
+                <InputLabel htmlFor='scale'>Scale</InputLabel>
+                <ScaleSelectStyle id='scale' onChange={ (e) => setNowScale(e.target.value)}>
+                  {scales.map((scale) =>
+                    <option value={scale} key={scale}>{scale}</option>
+                  )}
+                </ScaleSelectStyle>
+              </InputBox>
+            </InputRow>
+
+            <NotesStringStyle>
+              <p>{ scaleNotesString }</p>
+            </NotesStringStyle>
+            <FormSpaceV />
+            <InputRow>
+              <InputBox>
+                <InputLabel htmlFor='octave'>Octave</InputLabel>
+                <OctaveSelectStyle id='octave' defaultValue={4} onChange={ (e) => setNowOctave(parseInt(e.target.value))}>
+                  {octaves.map((octave) =>
+                    <option value={octave} key={octave}>{octave}</option>
+                  )}
+                </OctaveSelectStyle>
+              </InputBox>
               <FormSpace />
-              <PlayButtonStyle onClick={ playScale }>
-                Play
-              </PlayButtonStyle>
+              <InputBox>
+                <PlayButtonStyle onClick={ playScale }>
+                  Play
+                </PlayButtonStyle>
+              </InputBox>
+            </InputRow>
           </NoteStyle>
         </Content>
     );
