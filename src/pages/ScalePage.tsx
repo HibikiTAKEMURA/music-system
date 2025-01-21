@@ -124,13 +124,8 @@ const ScalePage = () => {
     abcjs.renderAbc('sheet-music', abcString, {
       selectionColor: '#EEEEEE',
       scale: (screenWidth >= 400 ? 1.5 : 1),
-      clickListener: listener
     });
   }, [abcString]);
-
-  const listener = (abcelem: object) => {
-    console.log(abcelem);
-  };
 
   const playScale = useCallback(() => {
     const now = Tone.now();
