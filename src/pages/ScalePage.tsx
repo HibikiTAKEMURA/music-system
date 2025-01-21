@@ -1,10 +1,11 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import '../App.css'
 import styled from "styled-components"
 
 import { Scale } from "tonal";
 import * as Tone from 'tone'
 import Content from '../components/atoms/Content';
+import abcjs from 'abcjs';
 
 const screenWidth = document.documentElement.clientWidth;
 
@@ -59,6 +60,11 @@ const NotesStringStyle = styled.div`
   }
 `;
 
+const NotesSheetStyle = styled.div`
+  overflowX: 'scroll';
+  width: ${(screenWidth <= 800 ? '800px' : '100%')};
+`;
+
 const InputLabel = styled.label`
   font-size: 16px;
   margin-bottom: 4px;
@@ -87,8 +93,44 @@ const ScalePage = () => {
   const [nowNote, setNowNote] = useState("C");
   const [nowScale, setNowScale] = useState("ionian");
   const [nowOctave, setNowOctave] = useState(4);
+
   const scaleNotesString = Scale.get(nowNote + " " + nowScale).notes.join(' ');
   const scaleNotesArray = Scale.get(nowNote + nowOctave + " " + nowScale).notes;
+  const scaleNotesScoreArray = Scale.get(nowNote + 4 + " " + nowScale).notes;
+
+  // CメジャースケールのABC記述をステートで管理
+  const [abcString, setAbcString] = useState('');
+
+  useEffect(() => {
+    let noteString = [];
+    for (let i = 0; i < scaleNotesScoreArray.length; i++) {
+      if (scaleNotesScoreArray[i].includes('5')) {
+        scaleNotesScoreArray[i] = scaleNotesScoreArray[i].toLowerCase();
+      }
+      scaleNotesScoreArray[i] = scaleNotesScoreArray[i].replace('4', '').replace('5', '');
+      if (scaleNotesScoreArray[i].length > 1 ) {
+        // 文字列が2文字以上の時：臨時記号あり
+        noteString.push(scaleNotesScoreArray[i].substring(1) + scaleNotesScoreArray[i].substring(0, 1));
+      } else {
+        noteString.push(scaleNotesScoreArray[i]);
+      }
+    }
+    
+    setAbcString('X:1\nL:1/4\nK:C\n' + noteString.join('').replace(/#/g, "^").replace(/b/g, '_') + '|');
+  });
+
+  useEffect(() => {
+    // ステートが変更されるたびに楽譜を再描画
+    abcjs.renderAbc('sheet-music', abcString, {
+      selectionColor: '#EEEEEE',
+      scale: (screenWidth >= 400 ? 1.5 : 1),
+      clickListener: listener
+    });
+  }, [abcString]);
+
+  const listener = (abcelem: object) => {
+    console.log(abcelem);
+  };
 
   const playScale = useCallback(() => {
     const now = Tone.now();
@@ -124,6 +166,9 @@ const ScalePage = () => {
 
             <NotesStringStyle>
               <p>{ scaleNotesString }</p>
+            </NotesStringStyle>
+            <NotesStringStyle>
+              <NotesSheetStyle id="sheet-music"></NotesSheetStyle>
             </NotesStringStyle>
             <FormSpaceV />
             <InputRow>
