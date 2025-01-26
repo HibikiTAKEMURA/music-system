@@ -6,6 +6,7 @@ import { Scale } from "tonal";
 import * as Tone from 'tone'
 import Content from '../components/atoms/Content';
 import abcjs from 'abcjs';
+import { NOTES, OCTAVES, SCALES } from '../constants/music';
 
 const screenWidth = document.documentElement.clientWidth;
 
@@ -83,9 +84,6 @@ const InputBox = styled.div`
   display: block;
 `;
 
-const notes =  ["C","Db","D","Eb","E","F","F#","G","Ab","A","Bb","B",];
-const octaves = [2,3,4,5,6];
-const scales = ["Ionian", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian", "Locrian","Harmonic Minor","Melodic Minor","Phrygian Dominant","Major Pentatonic","Minor Pentatonic","Whole Tone","Chromatic","Whole-Half Diminished","Half-Whole Diminished","Altered"];
 const synth = new Tone.Synth().toDestination();
 let noteLength = 0.5;
 
@@ -143,7 +141,7 @@ const ScalePage = () => {
               <InputBox>
                 <InputLabel htmlFor='note'>Note</InputLabel>
                 <NoteSelectStyle id='note' onChange={ (e) => setNowNote(e.target.value) }>
-                  {notes.map((note) =>
+                  {NOTES.map((note) =>
                     <option value={note} key={note}>{note}</option>
                   )}
                 </NoteSelectStyle>
@@ -152,7 +150,7 @@ const ScalePage = () => {
               <InputBox>
                 <InputLabel htmlFor='scale'>Scale</InputLabel>
                 <ScaleSelectStyle id='scale' onChange={ (e) => setNowScale(e.target.value)}>
-                  {scales.map((scale) =>
+                  {SCALES.map((scale) =>
                     <option value={scale} key={scale}>{scale}</option>
                   )}
                 </ScaleSelectStyle>
@@ -170,7 +168,7 @@ const ScalePage = () => {
               <InputBox>
                 <InputLabel htmlFor='octave'>Octave</InputLabel>
                 <OctaveSelectStyle id='octave' defaultValue={4} onChange={ (e) => setNowOctave(parseInt(e.target.value))}>
-                  {octaves.map((octave) =>
+                  {OCTAVES.map((octave) =>
                     <option value={octave} key={octave}>{octave}</option>
                   )}
                 </OctaveSelectStyle>
