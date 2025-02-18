@@ -88,12 +88,12 @@ const DefaultPage = (props: { children: React.ReactNode }) => {
                     {/* <Divider /> */}
                     <List>
                         <ListItem disablePadding>
-                            <ListItemButton href='/#/scale'>
+                            <ListItemButton href='/music-system/#/scale'>
                                 <ListItemText primary={'Scale'} />
                             </ListItemButton>
                         </ListItem>
                         <ListItem disablePadding>
-                            <ListItemButton href='/#/frequency'>
+                            <ListItemButton href='/music-system/#/frequency'>
                                 <ListItemText primary={'Oscillator'} />
                             </ListItemButton>
                         </ListItem>
