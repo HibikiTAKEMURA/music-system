@@ -172,9 +172,7 @@ const FrequencyPage = () => {
         <Content>        
           <NoteStyle>
             <h1>
-              Frequency<br/>
-              And<br/>
-              NoteNumber
+              Oscillator
             </h1>
             <InputBox>
               <PitchDisplay>{ nowPitch + 'Hz'}</PitchDisplay>
