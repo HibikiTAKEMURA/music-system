@@ -1,10 +1,10 @@
 import '../../App.css'
-import Container from '../../components/atoms/Container';
-import Content from '../../components/atoms/Content';
-import Footer from '../../components/atoms/Footer';
+import Container from '../atoms/Container';
+import Content from '../atoms/Content';
+import Footer from '../atoms/Footer';
 
 
-const Notfound = () => {
+const NotfoundContent = () => {
 
     return (
     <>
@@ -23,4 +23,4 @@ const Notfound = () => {
 };
 
 
-export default Notfound; 
+export default NotfoundContent; 
