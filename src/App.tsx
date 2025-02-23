@@ -2,7 +2,7 @@ import './App.css'
 import FrequencyPage from './pages/FrequencyPage'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import ScalePage from './pages/ScalePage'
-import NotfoundPage from './pages/error/FrequencyPage'
+import NotfoundPage from './pages/error/NotfoundPage'
 
 
 function App() {
