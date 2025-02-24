@@ -62,7 +62,7 @@ const TunerContent: React.FC = () => {
   return (
     <div>
       <p>Recording...</p>
-      <p>Detected Pitch: {detectedPitch ? `${detectedPitch.toFixed(2)} Hz` : "N/A"}</p>
+      {/* <p>Detected Pitch: {detectedPitch ? `${detectedPitch.toFixed(2)} Hz` : "N/A"}</p> */}
     </div>
   );
 };
