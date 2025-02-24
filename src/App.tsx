@@ -14,7 +14,7 @@ function App() {
         {/* <Route path="/score" element={<DefaultPage><ScorePageSample /></DefaultPage>} /> */}
         <Route path="/scale" element={<ScalePage />} />
         <Route path="/frequency" element={<FrequencyPage />} />
-        <Route path="/tuner" element={<TunerPage />} />
+        {/* <Route path="/tuner" element={<TunerPage />} /> */}
         {/* <Route path="/table" element={<DefaultPage><TablePage /></DefaultPage>} /> */}
         <Route path="*" element={<NotfoundPage />} />
       </Routes>
