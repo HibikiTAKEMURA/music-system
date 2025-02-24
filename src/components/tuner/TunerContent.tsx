@@ -9,55 +9,55 @@ const TunerContent: React.FC = () => {
   const [detectedPitch, setDetectedPitch] = useState<number | null>(null);
   const [sampleRate, setSampleRate] = useState<number>(48000);
 
-  useEffect(() => {
-    const initAudio = async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        const audioContext = new AudioContext();
-        audioContextRef.current = audioContext;
-        setSampleRate(audioContext.sampleRate);
-        console.log(audioContext.sampleRate);
+  // useEffect(() => {
+  //   const initAudio = async () => {
+  //     try {
+  //       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  //       const audioContext = new AudioContext();
+  //       audioContextRef.current = audioContext;
+  //       setSampleRate(audioContext.sampleRate);
+  //       console.log(audioContext.sampleRate);
 
-        await audioContext.audioWorklet.addModule("/audioProcessor.js");
-        const workletNode = new AudioWorkletNode(audioContext, "audio-processor");
-        workletNodeRef.current = workletNode;
+  //       await audioContext.audioWorklet.addModule("/audioProcessor.js");
+  //       const workletNode = new AudioWorkletNode(audioContext, "audio-processor");
+  //       workletNodeRef.current = workletNode;
 
-        const source = audioContext.createMediaStreamSource(stream);
-        source.connect(workletNode);
+  //       const source = audioContext.createMediaStreamSource(stream);
+  //       source.connect(workletNode);
 
-        // AudioWorkletNode からデータを取得
-        workletNode.port.onmessage = (event) => {
-          const float32Array = new Float32Array(event.data);
-          setAudioData(float32Array);
-        };
+  //       // AudioWorkletNode からデータを取得
+  //       workletNode.port.onmessage = (event) => {
+  //         const float32Array = new Float32Array(event.data);
+  //         setAudioData(float32Array);
+  //       };
 
-        // ごとにデータをリクエスト
-        intervalRef.current = setInterval(() => {
-          workletNode.port.postMessage("send");
-        }, 250);
+  //       // ごとにデータをリクエスト
+  //       intervalRef.current = setInterval(() => {
+  //         workletNode.port.postMessage("send");
+  //       }, 250);
 
-      } catch (err) {
-        console.error("Error accessing microphone:", err);
-      }
-    };
+  //     } catch (err) {
+  //       console.error("Error accessing microphone:", err);
+  //     }
+  //   };
 
-    initAudio();
+  //   initAudio();
 
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-      if (workletNodeRef.current) workletNodeRef.current.disconnect();
-      if (audioContextRef.current) audioContextRef.current.close();
-    };
-  }, []);
+  //   return () => {
+  //     if (intervalRef.current) clearInterval(intervalRef.current);
+  //     if (workletNodeRef.current) workletNodeRef.current.disconnect();
+  //     if (audioContextRef.current) audioContextRef.current.close();
+  //   };
+  // }, []);
 
-  // Pitchfinderを適用
-  useEffect(() => {
-    if (audioData) {
-      const detectPitch = Pitchfinder.AMDF({ sampleRate: sampleRate });
-      const pitch = detectPitch(audioData);
-      setDetectedPitch(pitch);
-    }
-  }, [audioData]);
+  // // Pitchfinderを適用
+  // useEffect(() => {
+  //   if (audioData) {
+  //     const detectPitch = Pitchfinder.AMDF({ sampleRate: sampleRate });
+  //     const pitch = detectPitch(audioData);
+  //     setDetectedPitch(pitch);
+  //   }
+  // }, [audioData]);
 
   return (
     <div>
