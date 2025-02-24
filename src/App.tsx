@@ -3,7 +3,7 @@ import FrequencyPage from './pages/FrequencyPage'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import ScalePage from './pages/ScalePage'
 import NotfoundPage from './pages/error/NotfoundPage'
-import TunerPage from './pages/TunerPage'
+// import TunerPage from './pages/TunerPage'
 
 
 function App() {
