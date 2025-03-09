@@ -81,7 +81,7 @@ const TableStyle = styled.div`
 `;
 
 const NoteStyle = styled.div`
-  padding: 24px 16px;
+  padding: 24px 0;
   display: flex;
   justify-content: center;
 `;
