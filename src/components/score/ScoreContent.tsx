@@ -6,48 +6,43 @@ import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Container } from '@mui/material';
 import EnhancedTableToolbar from './components/EnhancedTableToolbar';
 import EnhancedTableHead from './components/EnhancedTableHead';
 import { ScoreData } from '../../type/api/ScoreData';
 import { Order } from '../../type/utility/general';
 import { styled } from 'styled-components';
+import Container from '../atoms/Container';
 
 
 const screenWidth = document.documentElement.clientWidth;
 
 function createData(
   id: number,
-  name: string,
-  composer: number,
-  fat: number,
-  carbs: number,
-  protein: number,
+  title: string,
+  url: string,
+  composer: string,
+  lastUpdated: string,
+  majorPlayers: string[],
+  irealUrl?: string,
 ): ScoreData {
   return {
     id,
-    name,
+    title,
+    url,
     composer,
-    fat,
-    carbs,
-    protein,
+    lastUpdated,
+    majorPlayers,
+    irealUrl,
   };
 }
 
 const rows = [
-  createData(1, 'Cupcake', 305, 3.7, 67, 4.3),
-  createData(2, 'Donut', 452, 25.0, 51, 4.9),
-  createData(3, 'Eclair', 262, 16.0, 24, 6.0),
-  createData(4, 'Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData(5, 'Gingerbread', 356, 16.0, 49, 3.9),
-  createData(6, 'Honeycomb', 408, 3.2, 87, 6.5),
-  createData(7, 'Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData(8, 'Jelly Bean', 375, 0.0, 94, 0.0),
-  createData(9, 'KitKat', 518, 26.0, 65, 7.0),
-  createData(10, 'Lollipop', 392, 0.2, 98, 0.0),
-  createData(11, 'Marshmallow', 318, 0, 81, 2.0),
-  createData(12, 'Nougat', 360, 19.0, 9, 37.0),
-  createData(13, 'Oreo', 437, 18.0, 63, 4.0),
+  createData(1, 'Circus', 'https://drive.google.com/file/d/1Ta7tq4QlQU_cSmX-mAz2C_GgZMoHmHm8/view?usp=drive_link', 'Louis Alter', '2025/2/15', ['Art Blakey & Jazz Messengers', 'Steve Grossman']),
+  createData(2, 'Driftin', 'https://drive.google.com/file/d/1UxxcPRP6eCYawrhcSeMwlEPt_17nMVxu/view?usp=drive_link', 'Herbie Hancock', '2025/2/15', ['Herbie Hancock']),
+  createData(3, 'Sweet Pumpkin', 'https://drive.google.com/file/d/1G7_mGVY-tgTxjBSzFOogg_8uXb3BZBoM/view?usp=drive_link', 'Ronnell Bright', '2025/2/15', ['Blue Mitchlle']),
+  createData(4, 'Passages', 'https://drive.google.com/file/d/19jYEG4w-upONcC3ndjvkkOuDOl2D3yNU/view?usp=drive_link', 'Bob Brookmeyer', '2025/2/15', ['Bob Brookmeyer']),
+  createData(5, 'Voyage', 'https://drive.google.com/file/d/1VdpG72gkpnbJ9IVVgsYKVSQQMOlqGQiV/view?usp=drive_link', 'Kenny Barron', '2025/2/15', ['Kenny Barron', 'George Robert']),
+  createData(6, 'Time to Smile', 'https://drive.google.com/file/d/1s1Yg1b9Q0nKbK7hWUlDJ7Gx764hHZ7IV/view?usp=drive_link', 'Freddie Redd', '2025/2/15', ['Freddie Redd', 'Steve Grossman']),
 ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -60,12 +55,12 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
-function getComparator<Key extends keyof any>(
+function getComparator(
   order: Order,
-  orderBy: Key,
+  orderBy: keyof ScoreData,
 ): (
-  a: { [key in Key]: number | string },
-  b: { [key in Key]: number | string },
+  a: ScoreData,
+  b: ScoreData,
 ) => number {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
@@ -73,7 +68,9 @@ function getComparator<Key extends keyof any>(
 }
 
 const TableStyle = styled.div`
-  width: '100%';
+  display: flex;
+  justify-content: ${screenWidth < 400 ? 'left' : 'center'};
+  width: 100%;
   overflow-x: auto; /* 横方向のスクロールを有効化 */
   overflow-y: hidden; /* 縦方向のスクロールを非表示 */
   white-space: nowrap; /* コンテンツの折り返しを防ぐ */
@@ -130,49 +127,42 @@ export default function ScoreContent() {
         <h1>Scores</h1>
       </NoteStyle>
       <TableStyle>
-        <Paper sx={{ width: '1150px', mb: 2, padding: 3}}>
+        <Paper sx={{ width: '1200px', mb: 2, padding: 3 }}>
           <EnhancedTableToolbar numSelected={selected.length} />
           <TableContainer>
             <Table
-              sx={{ minWidth: 750, maxWidth: 900}}
               aria-labelledby="tableTitle"
             >
               <EnhancedTableHead
                 numSelected={selected.length}
                 order={order}
                 orderBy={orderBy}
-                // onSelectAllClick={handleSelectAllClick}
                 onRequestSort={handleRequestSort}
                 rowCount={rows.length}
               />
               <TableBody>
                 {visibleRows.map((row, index) => {
-                  const isItemSelected = selected.includes(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
-                      hover
-                      // onClick={(event) => handleClick(event, row.id)}
                       role="checkbox"
-                      aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={row.id}
-                      selected={isItemSelected}
-                      sx={{ cursor: 'pointer' }}
                     >
                       <TableCell
                         component="th"
                         id={labelId}
                         scope="row"
                         padding="none"
+                        sx={{ width: '150px' }}
                       >
-                        {row.name}
+                        <a href={row.url}>{row.title}</a>
                       </TableCell>
-                      <TableCell align="right">{row.composer}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="left" sx={{ width: '150px' }}>{row.composer}</TableCell>
+                      <TableCell align="left" sx={{ width: '150px' }}>{row.majorPlayers.join(", ")}</TableCell>
+                      <TableCell align="left" sx={{ width: '150px' }}>{row.lastUpdated}</TableCell>
+                      {/* <TableCell align="right">{row.protein}</TableCell> */}
                     </TableRow>
                   );
                 })}
