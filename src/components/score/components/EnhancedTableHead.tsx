@@ -19,7 +19,6 @@ interface EnhancedTableProps {
 }
 
 interface HeadCell {
-  disablePadding: boolean;
   id: keyof ScoreData;
   label: string;
   numeric: boolean;
@@ -27,35 +26,30 @@ interface HeadCell {
 
 const headCells: readonly HeadCell[] = [
   {
-    id: 'name',
+    id: 'title',
     numeric: false,
-    disablePadding: true,
-    label: 'Dessert (100g serving)',
+    label: 'Title',
   },
   {
     id: 'composer',
-    numeric: true,
-    disablePadding: false,
+    numeric: false,
     label: 'Composer',
   },
   {
-    id: 'fat',
-    numeric: true,
-    disablePadding: false,
-    label: 'Fat (g)',
+    id: 'majorPlayers',
+    numeric: false,
+    label: 'Majpr Players',
   },
   {
-    id: 'carbs',
-    numeric: true,
-    disablePadding: false,
-    label: 'Carbs (g)',
+    id: 'lastUpdated',
+    numeric: false,
+    label: 'Last Updated',
   },
-  {
-    id: 'protein',
-    numeric: true,
-    disablePadding: false,
-    label: 'Protein (g)',
-  },
+  // {
+  //   id: 'irealUrl',
+  //   numeric: false,
+  //   label: 'iReal Data',
+  // },
 ];
 
 export default function EnhancedTableHead(props: EnhancedTableProps) {
@@ -73,7 +67,6 @@ export default function EnhancedTableHead(props: EnhancedTableProps) {
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
