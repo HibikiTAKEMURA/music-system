@@ -34,8 +34,8 @@ const DefaultPage = (props: { children: React.ReactNode }) => {
                 <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 </Box>
             </Box>
+          {props.children}
         </ThemeProvider>
-        {props.children}
         <Footer />
     </Container>
   );

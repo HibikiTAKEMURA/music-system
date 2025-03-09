@@ -3,7 +3,8 @@ import FrequencyPage from './pages/FrequencyPage'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import ScalePage from './pages/ScalePage'
 import NotfoundPage from './pages/error/NotfoundPage'
-// import TunerPage from './pages/TunerPage'
+import { PAGE_URLS } from './constants/appSettings'
+import ScorePage from './pages/ScorePage'
 
 
 function App() {
@@ -12,10 +13,10 @@ function App() {
       <Routes>
         {/* <Route path="/home" element={<DefaultPage><Home /></DefaultPage>} /> */}
         {/* <Route path="/score" element={<DefaultPage><ScorePageSample /></DefaultPage>} /> */}
-        <Route path="/scale" element={<ScalePage />} />
-        <Route path="/frequency" element={<FrequencyPage />} />
-        {/* <Route path="/tuner" element={<TunerPage />} /> */}
-        {/* <Route path="/table" element={<DefaultPage><TablePage /></DefaultPage>} /> */}
+        <Route path={PAGE_URLS.SCALE} element={<ScalePage />} />
+        <Route path={PAGE_URLS.OSCILLATOR} element={<FrequencyPage />} />
+        <Route path={PAGE_URLS.SCORE} element={<ScorePage />} />
+        {/* <Route path="/table" element={<TablePage />} /> */}
         <Route path="*" element={<NotfoundPage />} />
       </Routes>
     </HashRouter>
