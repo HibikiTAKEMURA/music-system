@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import EnhancedTableToolbar from './components/EnhancedTableToolbar';
 import EnhancedTableHead from './components/EnhancedTableHead';
+import axiosBase from 'axios';
 import { ScoreData } from '../../type/api/ScoreData';
 import { Order } from '../../type/utility/general';
 import { styled } from 'styled-components';
@@ -36,14 +37,14 @@ function createData(
   };
 }
 
-const rows = [
-  createData(1, 'Circus', 'https://drive.google.com/file/d/1Ta7tq4QlQU_cSmX-mAz2C_GgZMoHmHm8/view?usp=drive_link', 'Louis Alter', '2025/2/15', ['Art Blakey & Jazz Messengers', 'Steve Grossman']),
-  createData(2, 'Driftin', 'https://drive.google.com/file/d/1UxxcPRP6eCYawrhcSeMwlEPt_17nMVxu/view?usp=drive_link', 'Herbie Hancock', '2025/2/15', ['Herbie Hancock']),
-  createData(3, 'Sweet Pumpkin', 'https://drive.google.com/file/d/1G7_mGVY-tgTxjBSzFOogg_8uXb3BZBoM/view?usp=drive_link', 'Ronnell Bright', '2025/2/15', ['Blue Mitchlle']),
-  createData(4, 'Passages', 'https://drive.google.com/file/d/19jYEG4w-upONcC3ndjvkkOuDOl2D3yNU/view?usp=drive_link', 'Bob Brookmeyer', '2025/2/15', ['Bob Brookmeyer']),
-  createData(5, 'Voyage', 'https://drive.google.com/file/d/1VdpG72gkpnbJ9IVVgsYKVSQQMOlqGQiV/view?usp=drive_link', 'Kenny Barron', '2025/2/15', ['Kenny Barron', 'George Robert']),
-  createData(6, 'Time to Smile', 'https://drive.google.com/file/d/1s1Yg1b9Q0nKbK7hWUlDJ7Gx764hHZ7IV/view?usp=drive_link', 'Freddie Redd', '2025/2/15', ['Freddie Redd', 'Steve Grossman']),
-];
+// const rows = [
+//   createData(1, 'Circus', 'https://drive.google.com/file/d/1Ta7tq4QlQU_cSmX-mAz2C_GgZMoHmHm8/view?usp=drive_link', 'Louis Alter', '2025/2/15', ['Art Blakey & Jazz Messengers', 'Steve Grossman']),
+//   createData(2, 'Driftin', 'https://drive.google.com/file/d/1UxxcPRP6eCYawrhcSeMwlEPt_17nMVxu/view?usp=drive_link', 'Herbie Hancock', '2025/2/15', ['Herbie Hancock']),
+//   createData(3, 'Sweet Pumpkin', 'https://drive.google.com/file/d/1G7_mGVY-tgTxjBSzFOogg_8uXb3BZBoM/view?usp=drive_link', 'Ronnell Bright', '2025/2/15', ['Blue Mitchlle']),
+//   createData(4, 'Passages', 'https://drive.google.com/file/d/19jYEG4w-upONcC3ndjvkkOuDOl2D3yNU/view?usp=drive_link', 'Bob Brookmeyer', '2025/2/15', ['Bob Brookmeyer']),
+//   createData(5, 'Voyage', 'https://drive.google.com/file/d/1VdpG72gkpnbJ9IVVgsYKVSQQMOlqGQiV/view?usp=drive_link', 'Kenny Barron', '2025/2/15', ['Kenny Barron', 'George Robert']),
+//   createData(6, 'Time to Smile', 'https://drive.google.com/file/d/1s1Yg1b9Q0nKbK7hWUlDJ7Gx764hHZ7IV/view?usp=drive_link', 'Freddie Redd', '2025/2/15', ['Freddie Redd', 'Steve Grossman']),
+// ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -84,11 +85,12 @@ const NoteStyle = styled.div`
 `;
 
 export default function ScoreContent() {
-  const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof ScoreData>('composer');
-  const [selected, setSelected] = React.useState<readonly number[]>([]);
+  const [order, setOrder] = React.useState<Order>('desc');
+  const [orderBy, setOrderBy] = React.useState<keyof ScoreData>('title');
+  const [selected] = React.useState<readonly number[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rows, setRows] = React.useState<ScoreData[]>([]);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -121,6 +123,31 @@ export default function ScoreContent() {
     [order, orderBy, page, rowsPerPage],
   );
 
+  React.useEffect(() => {
+    // POST リクエストを送信する関数
+    const sendPostRequest = async () => {
+      try {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbxm1wcpNCgnVgZF-PvppnNvRwHyDu1apRCKBeUtG3decpidDqn6cjz421TvjlCAS5Cn/exec", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain',
+          },
+          body: JSON.stringify({ key: "value" }), // 必要なデータをJSON形式で送る
+        });
+
+        // レスポンスをJSON形式で取得
+        response.json().then((data) => {
+          setRows(data);
+          setOrder('asc');
+        });
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    sendPostRequest(); // 関数を呼び出す
+  }, []);
+
   return (
     <Container>
       <NoteStyle>
@@ -148,7 +175,7 @@ export default function ScoreContent() {
                     <TableRow
                       role="checkbox"
                       tabIndex={-1}
-                      key={row.id}
+                      key={index}
                     >
                       <TableCell
                         component="th"
