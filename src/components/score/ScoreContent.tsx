@@ -8,7 +8,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import EnhancedTableToolbar from './components/EnhancedTableToolbar';
 import EnhancedTableHead from './components/EnhancedTableHead';
-import axiosBase from 'axios';
 import { ScoreData } from '../../type/api/ScoreData';
 import { Order } from '../../type/utility/general';
 import { styled } from 'styled-components';
@@ -16,35 +15,6 @@ import Container from '../atoms/Container';
 
 
 const screenWidth = document.documentElement.clientWidth;
-
-function createData(
-  id: number,
-  title: string,
-  url: string,
-  composer: string,
-  lastUpdated: string,
-  majorPlayers: string[],
-  irealUrl?: string,
-): ScoreData {
-  return {
-    id,
-    title,
-    url,
-    composer,
-    lastUpdated,
-    majorPlayers,
-    irealUrl,
-  };
-}
-
-// const rows = [
-//   createData(1, 'Circus', 'https://drive.google.com/file/d/1Ta7tq4QlQU_cSmX-mAz2C_GgZMoHmHm8/view?usp=drive_link', 'Louis Alter', '2025/2/15', ['Art Blakey & Jazz Messengers', 'Steve Grossman']),
-//   createData(2, 'Driftin', 'https://drive.google.com/file/d/1UxxcPRP6eCYawrhcSeMwlEPt_17nMVxu/view?usp=drive_link', 'Herbie Hancock', '2025/2/15', ['Herbie Hancock']),
-//   createData(3, 'Sweet Pumpkin', 'https://drive.google.com/file/d/1G7_mGVY-tgTxjBSzFOogg_8uXb3BZBoM/view?usp=drive_link', 'Ronnell Bright', '2025/2/15', ['Blue Mitchlle']),
-//   createData(4, 'Passages', 'https://drive.google.com/file/d/19jYEG4w-upONcC3ndjvkkOuDOl2D3yNU/view?usp=drive_link', 'Bob Brookmeyer', '2025/2/15', ['Bob Brookmeyer']),
-//   createData(5, 'Voyage', 'https://drive.google.com/file/d/1VdpG72gkpnbJ9IVVgsYKVSQQMOlqGQiV/view?usp=drive_link', 'Kenny Barron', '2025/2/15', ['Kenny Barron', 'George Robert']),
-//   createData(6, 'Time to Smile', 'https://drive.google.com/file/d/1s1Yg1b9Q0nKbK7hWUlDJ7Gx764hHZ7IV/view?usp=drive_link', 'Freddie Redd', '2025/2/15', ['Freddie Redd', 'Steve Grossman']),
-// ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -89,8 +59,10 @@ export default function ScoreContent() {
   const [orderBy, setOrderBy] = React.useState<keyof ScoreData>('title');
   const [selected] = React.useState<readonly number[]>([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState<ScoreData[]>([]);
+  const [searchString, setSearchString] = React.useState<string>('');
+  const [visibleRows, setVisibleRows] = React.useState<ScoreData[]>([]);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -115,13 +87,21 @@ export default function ScoreContent() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  const visibleRows = React.useMemo(
-    () =>
-      [...rows]
-        .sort(getComparator(order, orderBy))
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-    [order, orderBy, page, rowsPerPage],
-  );
+  React.useEffect(() => {
+    // 検索文字列に一致する行を抽出
+    // 大文字と小文字を区別せずに検索する
+    const filteredRows = rows.filter((row) => {
+      if (searchString === '') {
+      return true;
+      }
+      return row.title.toLowerCase().includes(searchString.toLowerCase());
+    });
+
+    const sortedRows = filteredRows.sort(getComparator(order, orderBy));
+    const paginatedRows = sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
+    setVisibleRows(paginatedRows);
+  }, [rows, order, orderBy, page, rowsPerPage, searchString]);
 
   React.useEffect(() => {
     // POST リクエストを送信する関数
@@ -155,7 +135,10 @@ export default function ScoreContent() {
       </NoteStyle>
       <TableStyle>
         <Paper sx={{ width: '1200px', mb: 2, padding: 3 }}>
-          <EnhancedTableToolbar numSelected={selected.length} />
+          <EnhancedTableToolbar
+            setSearchString={setSearchString}
+            screenWidth={screenWidth}
+          />
           <TableContainer>
             <Table
               aria-labelledby="tableTitle"
@@ -182,13 +165,13 @@ export default function ScoreContent() {
                         id={labelId}
                         scope="row"
                         padding="none"
-                        sx={{ width: '150px' }}
+                        sx={{ width: '150px', fontSize: '18px', fontWeight: 1000 }}
                       >
-                        <a href={row.url}>{row.title}</a>
+                        <a href={row.url} style={{ color: '#7799FF' }}>{row.title}</a>
                       </TableCell>
-                      <TableCell align="left" sx={{ width: '150px' }}>{row.composer}</TableCell>
-                      <TableCell align="left" sx={{ width: '150px' }}>{row.majorPlayers.join(", ")}</TableCell>
-                      <TableCell align="left" sx={{ width: '150px' }}>{row.lastUpdated}</TableCell>
+                      <TableCell align="left" sx={{ width: '150px', fontSize: '18px' }}>{row.composer}</TableCell>
+                      <TableCell align="left" sx={{ width: '150px', fontSize: '18px' }}>{row.majorPlayers.join(", ")}</TableCell>
+                      <TableCell align="left" sx={{ width: '150px', fontSize: '18px' }}>{row.lastUpdated}</TableCell>
                       {/* <TableCell align="right">{row.protein}</TableCell> */}
                     </TableRow>
                   );
@@ -201,7 +184,20 @@ export default function ScoreContent() {
               </TableBody>
             </Table>
           </TableContainer>
-          <TablePagination sx={{ width: screenWidth < 400 ? '300px' : screenWidth < 800 ? '400px' : '850px' }}
+          {/* ToDo フォントの大きさを18pxに設定する */}
+          <TablePagination
+            sx={{
+              width: screenWidth < 400 ? '300px' : screenWidth < 800 ? '400px' : '850px',
+              color: '#FFCCAA',
+              '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows': {
+                fontSize: '16px',
+                fontWeight: 600,
+              },
+              '& .MuiTablePagination-select, & .MuiTablePagination-actions': {
+                fontSize: '16px',
+                fontWeight: 600,
+              }
+            }}
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
             count={rows.length}
