@@ -12,6 +12,7 @@ import { ScoreData } from '../../type/api/ScoreData';
 import { Order } from '../../type/utility/general';
 import { styled } from 'styled-components';
 import Container from '../atoms/Container';
+import { Pagination } from '@mui/material';
 
 
 const screenWidth = document.documentElement.clientWidth;
@@ -63,6 +64,7 @@ export default function ScoreContent() {
   const [rows, setRows] = React.useState<ScoreData[]>([]);
   const [searchString, setSearchString] = React.useState<string>('');
   const [visibleRows, setVisibleRows] = React.useState<ScoreData[]>([]);
+  const [sortedRowLength, setSortedRowLength] = React.useState(0);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -82,6 +84,21 @@ export default function ScoreContent() {
     setPage(0);
   };
 
+  function formatDateString(dateString: string) {
+    // 引数として受け取った日時文字列をDateオブジェクトに変換
+    const date = new Date(dateString);
+  
+    // 年、月、日、時間、分を取得
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // 月は0から始まるため+1
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    const hours = String(date.getUTCHours()).padStart(2, '0');
+    const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+  
+    // フォーマットした文字列を返す
+    return `${year}/${month}/${day} ${hours}:${minutes}`;
+  }
+
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -98,8 +115,8 @@ export default function ScoreContent() {
     });
 
     const sortedRows = filteredRows.sort(getComparator(order, orderBy));
+    setSortedRowLength(sortedRows.length);
     const paginatedRows = sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
     setVisibleRows(paginatedRows);
   }, [rows, order, orderBy, page, rowsPerPage, searchString]);
 
@@ -167,11 +184,11 @@ export default function ScoreContent() {
                         padding="none"
                         sx={{ width: '150px', fontSize: '18px', fontWeight: 1000 }}
                       >
-                        <a href={row.url} style={{ color: '#7799FF' }}>{row.title}</a>
+                        <a href={row.url} style={{ color: '#c1e4e9' }}>{row.title}</a>
                       </TableCell>
-                      <TableCell align="left" sx={{ width: '150px', fontSize: '18px' }}>{row.composer}</TableCell>
-                      <TableCell align="left" sx={{ width: '150px', fontSize: '18px' }}>{row.majorPlayers.join(", ")}</TableCell>
-                      <TableCell align="left" sx={{ width: '150px', fontSize: '18px' }}>{row.lastUpdated}</TableCell>
+                      <TableCell align="left" sx={{ width: '150px', fontSize: '18px', color: '#ded5c0' }}>{row.composer}</TableCell>
+                      <TableCell align="left" sx={{ width: '150px', fontSize: '18px', color: '#ded5c0' }}>{row.majorPlayers.join(", ")}</TableCell>
+                      <TableCell align="left" sx={{ width: '150px', fontSize: '18px', color: '#ded5c0' }}>{formatDateString(row.lastUpdated)}</TableCell>
                       {/* <TableCell align="right">{row.protein}</TableCell> */}
                     </TableRow>
                   );
@@ -184,12 +201,11 @@ export default function ScoreContent() {
               </TableBody>
             </Table>
           </TableContainer>
-          {/* ToDo フォントの大きさを18pxに設定する */}
           <TablePagination
             sx={{
-              width: screenWidth < 400 ? '300px' : screenWidth < 800 ? '400px' : '850px',
-              color: '#FFCCAA',
-              '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows': {
+              width: screenWidth < 400 ? '300px' : screenWidth < 800 ? '400px' : '100%',
+              color: '#f6ad49',
+              '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows, ': {
                 fontSize: '16px',
                 fontWeight: 600,
               },
@@ -200,7 +216,7 @@ export default function ScoreContent() {
             }}
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={rows.length}
+            count={sortedRowLength}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
