@@ -12,7 +12,6 @@ import { ScoreData } from '../../type/api/ScoreData';
 import { Order } from '../../type/utility/general';
 import { styled } from 'styled-components';
 import Container from '../atoms/Container';
-import { Pagination } from '@mui/material';
 
 
 const screenWidth = document.documentElement.clientWidth;
@@ -41,9 +40,8 @@ function getComparator(
 
 const TableStyle = styled.div`
   display: flex;
-  justify-content: ${screenWidth < 400 ? 'left' : 'center'};
+  justify-content: ${screenWidth < 450 ? 'left' : 'center'};
   width: 100%;
-  overflow-x: auto; /* 横方向のスクロールを有効化 */
   overflow-y: hidden; /* 縦方向のスクロールを非表示 */
   white-space: nowrap; /* コンテンツの折り返しを防ぐ */
   box-sizing: border-box; /* パディングやボーダーを幅に含める */
@@ -109,7 +107,7 @@ export default function ScoreContent() {
     // 大文字と小文字を区別せずに検索する
     const filteredRows = rows.filter((row) => {
       if (searchString === '') {
-      return true;
+        return true;
       }
       return row.title.toLowerCase().includes(searchString.toLowerCase());
     });
@@ -119,6 +117,10 @@ export default function ScoreContent() {
     const paginatedRows = sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
     setVisibleRows(paginatedRows);
   }, [rows, order, orderBy, page, rowsPerPage, searchString]);
+
+  React.useEffect(() => {
+    setPage(0);
+  }, [setPage, searchString]);
 
   React.useEffect(() => {
     // POST リクエストを送信する関数
@@ -151,7 +153,7 @@ export default function ScoreContent() {
         <h1>Scores</h1>
       </NoteStyle>
       <TableStyle>
-        <Paper sx={{ width: '1200px', mb: 2, padding: 3 }}>
+        <Paper sx={{ width: '1200px', mb: 2, padding: 3, overflow: 'auto' }}>
           <EnhancedTableToolbar
             setSearchString={setSearchString}
             screenWidth={screenWidth}
@@ -203,7 +205,7 @@ export default function ScoreContent() {
           </TableContainer>
           <TablePagination
             sx={{
-              width: screenWidth < 400 ? '300px' : screenWidth < 800 ? '400px' : '100%',
+              width: screenWidth < 450 ? '300px' : screenWidth < 800 ? '425px' : '100%',
               color: '#f6ad49',
               '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows, ': {
                 fontSize: '16px',
