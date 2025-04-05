@@ -205,7 +205,7 @@ export default function ScoreContent() {
           </TableContainer>
           <TablePagination
             sx={{
-              width: screenWidth < 450 ? '300px' : screenWidth < 800 ? '425px' : '100%',
+              width: screenWidth < 450 ? '350px' : screenWidth < 800 ? '425px' : '100%',
               color: '#f6ad49',
               '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows, ': {
                 fontSize: '16px',
@@ -223,6 +223,7 @@ export default function ScoreContent() {
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
+            labelRowsPerPage={'Rows/page'}
           />
         </Paper>
       </TableStyle>
