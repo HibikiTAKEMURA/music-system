@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import '../../App.css'
+import '@/App.css'
 import styled from "styled-components"
 
 import { Note } from "tonal";
 import * as Tone from 'tone'
-import Content from '../atoms/Content';
-import { NOTES, OCTAVES, STANDARD_PITCH } from '../../constants/music';
+
+import { NOTES, OCTAVES, STANDARD_PITCH } from '@/constants/music';
+import Content from '@/components/atoms/Content';
 
 const screenWidth = document.documentElement.clientWidth;
 
