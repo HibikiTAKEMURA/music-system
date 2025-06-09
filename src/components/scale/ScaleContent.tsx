@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from 'react'
-import '../../App.css'
+import '@/App.css'
 import styled from "styled-components"
 
 import { Scale } from "tonal";
 import * as Tone from 'tone'
-import Content from '../atoms/Content';
+
 import abcjs from 'abcjs';
-import { NOTES, OCTAVES, SCALES } from '../../constants/music';
+import { NOTES, OCTAVES, SCALES } from '@/constants/music';
+import Content from '@/components/atoms/Content';
 
 const screenWidth = document.documentElement.clientWidth;
 
@@ -113,7 +114,6 @@ const ScaleContent = () => {
         noteString.push(scaleNotesScoreArray[i]);
       }
     }
-    
     setAbcString('X:1\nL:1/4\nK:C\n' + noteString.join('').replace(/#/g, "^").replace(/b/g, '_') + '|');
   });
 
