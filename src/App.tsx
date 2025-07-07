@@ -1,10 +1,11 @@
 import './App.css'
 import FrequencyPage from './pages/FrequencyPage'
-import { HashRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router'
 import ScalePage from './pages/ScalePage'
 import NotfoundPage from './pages/error/NotfoundPage'
 import { PAGE_URLS } from './constants/appSettings'
 import ScorePage from './pages/ScorePage'
+import ChordPage from '@/pages/ChordPage'
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path={PAGE_URLS.SCALE} element={<ScalePage />} />
         <Route path={PAGE_URLS.OSCILLATOR} element={<FrequencyPage />} />
         <Route path={PAGE_URLS.SCORE} element={<ScorePage />} />
+        <Route path={PAGE_URLS.CHORD} element={<ChordPage />} />
         {/* <Route path="/table" element={<TablePage />} /> */}
         <Route path="*" element={<NotfoundPage />} />
       </Routes>
