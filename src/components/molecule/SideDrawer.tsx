@@ -1,7 +1,7 @@
 import { Divider, Drawer, List, ListItem, ListItemButton, ListItemText, styled } from "@mui/material";
 import { URLS } from "../../constants/appSettings";
-import { useAtom } from "jotai";
-import { sideMenuAtom } from "../../jotais/default";
+import { useAtomValue } from "jotai";
+import { locationPathAtom } from "@/jotais/default";
 
 
 type SideDrawerProps = {
@@ -19,7 +19,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const SideDrawer:  React.FC<SideDrawerProps> = ({ handleDrawer, drawerWidth, open }) => {
-    const [selectedSideMenu, setSelectedSideMenu] = useAtom(sideMenuAtom);
+    const locationPath = useAtomValue(locationPathAtom);
     return(
         <Drawer
             sx={{
@@ -45,9 +45,8 @@ const SideDrawer:  React.FC<SideDrawerProps> = ({ handleDrawer, drawerWidth, ope
                                 href={url.url}
                                 onClick={() => {
                                     handleDrawer();
-                                    setSelectedSideMenu(index);    
                                 }}
-                                disabled={index === selectedSideMenu}
+                                disabled={url.url === locationPath}
                             >
                                 <ListItemText primary={url.title} />
                             </ListItemButton>

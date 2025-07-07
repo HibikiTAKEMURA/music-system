@@ -8,6 +8,10 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Header from '../components/molecule/Header';
 import SideDrawer from '../components/molecule/SideDrawer';
+import { useLocation } from 'react-router';
+import { locationPathAtom } from '@/jotais/default';
+import { useSetAtom } from 'jotai';
+import { BASE_URL_NO_SLASH } from '@/constants/appSettings';
 
 const drawerWidth = 960;
 
@@ -19,6 +23,12 @@ const darkTheme = createTheme({
 
 const DefaultPage = (props: { children: React.ReactNode }) => {
   const [open, setOpen] = React.useState(false);
+  const location = useLocation();
+  const setLocationPath = useSetAtom(locationPathAtom);
+
+  React.useEffect(() => {
+    setLocationPath(BASE_URL_NO_SLASH + location.pathname);
+  }, [location]);
 
   const handleDrawer = () => {
     setOpen(!open);
