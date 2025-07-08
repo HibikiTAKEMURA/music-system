@@ -1,0 +1,9 @@
+.button-style {
+  width: 96px;
+  height: 40px;
+  font-size: 12pt;
+  vertical-align: middle;
+  font-weight: 400;
+  margin-top: 26px;
+  background-color: rgb(74, 22, 122);
+}

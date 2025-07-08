@@ -1,12 +1,12 @@
 import { Chord } from "@/type/music/chord";
 
-const MAJOR: Chord[] = [
+export const MAJOR: Chord[] = [
   {
     numberOfSeminotes: 0,
-    degreeName: "IM7",
+    degreeName: "Imaj7",
     function: "Tonic",
     modality: ["Diatonic"],
-    type: "M7",
+    type: "maj7",
     scales: ["Ionian"]
   },
   {
@@ -27,10 +27,10 @@ const MAJOR: Chord[] = [
   },
   {
     numberOfSeminotes: 5,
-    degreeName: "IVM7",
+    degreeName: "IVmaj7",
     function: "Sub Dominant",
     modality: ["Diatonic"],
-    type: "M7",
+    type: "maj7",
     scales: ["Lydian"]
   },
   {
@@ -51,18 +51,18 @@ const MAJOR: Chord[] = [
   },
   {
     numberOfSeminotes: 11,
-    degreeName: "VIIm7(b7)",
+    degreeName: "VIIm7b5",
     function: "Dominant",
     modality: ["Diatonic"],
-    type: "m7(b5)",
+    type: "m7b5",
     scales: ["Locrian"]
   },
   {
     numberOfSeminotes: 0,
-    degreeName: "I",
+    degreeName: "Imaj",
     function: "Tonic",
     modality: ["Diatonic"],
-    type: " ",
+    type: "maj",
     scales: ["Ionian"]
   },
   {
@@ -91,10 +91,10 @@ const MAJOR: Chord[] = [
   },
   {
     numberOfSeminotes: 7,
-    degreeName: "V",
+    degreeName: "Vmaj",
     function: "Dominant",
     modality: ["Diatonic"],
-    type: " ",
+    type: "maj",
     scales: ["Mixolydian"]
   },
   {
