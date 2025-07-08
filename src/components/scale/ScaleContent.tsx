@@ -8,6 +8,11 @@ import * as Tone from 'tone'
 import abcjs from 'abcjs';
 import { NOTES, OCTAVES, SCALES } from '@/constants/music';
 import Content from '@/components/atoms/Content';
+import InputRow from '@/components/atoms/InputRow/InputRow';
+import InputBox from '@/components/atoms/InputBox/InputBox';
+import InputLabel from '@/components/atoms/InputLabel/InputLabel';
+import FormSpace from '@/components/atoms/FormSpace/FormSpace';
+import PlayButtonStyle from '@/components/atoms/PlayButtonStyle/PlayButtonStyle';
 
 const screenWidth = document.documentElement.clientWidth;
 
@@ -33,19 +38,6 @@ const OctaveSelectStyle = styled.select`
   font-size: 14pt;
 `;
 
-const PlayButtonStyle = styled.button`
-  width: 96px;
-  height: 40px;
-  font-size: 12pt;
-  vertical-align: middle;
-  font-weight: 400;
-  margin-top: 26px;
-`;
-
-const FormSpace = styled.span`
-  margin: 4px;
-`;
-
 const FormSpaceV = styled.div`
   padding: 4px;
 `;
@@ -65,24 +57,6 @@ const NotesStringStyle = styled.div`
 const NotesSheetStyle = styled.div`
   overflowX: 'scroll';
   width: ${(screenWidth <= 800 ? '800px' : '100%')};
-`;
-
-const InputLabel = styled.label`
-  font-size: 16px;
-  margin-bottom: 4px;
-  margin-left: 2px;
-  display: block;
-  text-align: left;
-`;
-
-const InputRow = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;       /* 必要に応じて変更 */
-`;
-
-const InputBox = styled.div`
-  display: block;
 `;
 
 const synth = new Tone.Synth().toDestination();
@@ -156,7 +130,6 @@ const ScaleContent = () => {
                 </ScaleSelectStyle>
               </InputBox>
             </InputRow>
-
             <NotesStringStyle>
               <p>{ scaleNotesString }</p>
             </NotesStringStyle>
