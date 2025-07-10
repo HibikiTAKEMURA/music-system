@@ -60,7 +60,7 @@ function AvailableChordContent({ selectedKey, setSelectedKey, synth, selectedFun
       <InputRow>
         <InputBox>
           <InputLabel htmlFor='key'>Key</InputLabel>
-          <select className={styles.keySelect} id='key' onChange={ (e) => setSelectedKey(e.target.value) }>
+          <select className={styles.keySelect} id='key' defaultValue={selectedKey} onChange={ (e) => setSelectedKey(e.target.value) }>
             {NOTES.map((note) =>
               <option value={note} key={note}>{note}</option>
             )}
@@ -69,7 +69,7 @@ function AvailableChordContent({ selectedKey, setSelectedKey, synth, selectedFun
           <FormSpace />
         <InputBox>
           <InputLabel htmlFor='function'>Function</InputLabel>
-          <select className={styles.functionSelect} id='function' onChange={ (e) => setSelectedFunction(e.target.value) }>
+          <select className={styles.functionSelect} id='function' defaultValue={selectedFunction} onChange={ (e) => setSelectedFunction(e.target.value) }>
             <option value={''} key={''}></option>
             {FUNCTIONS.map((func) =>
               <option value={func} key={func}>{func}</option>
