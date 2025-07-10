@@ -1,17 +1,9 @@
 import styles from './ChordFunctionContent.module.css';
-
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import { useCallback, useMemo, useState } from 'react';
 import { Type } from '@/type/music/chord';
 import { MAJOR, MINOR } from '@/constants/chord';
 import { NOTES, TYPES } from '@/constants/music';
-import TableTitle from '@/components/atoms/TableTitle/TableTitle';
 import InputRow from '@/components/atoms/InputRow/InputRow';
 import InputBox from '@/components/atoms/InputBox/InputBox';
 import InputLabel from '@/components/atoms/InputLabel/InputLabel';
@@ -19,33 +11,20 @@ import FormSpace from '@/components/atoms/FormSpace/FormSpace';
 import PlayButtonStyle from '@/components/atoms/PlayButtonStyle/PlayButtonStyle';
 import * as Tone from 'tone'
 import { Chord } from "tonal";
+import ChordFunctionTable from '@/components/chord/ChordFunctionTable/ChordFunctionTable';
 
+type ChordFunctionContentProps = {
+  selectedNote: string;
+  setSelectedNote: (note: string) => void;
+  selectedChord: Type;
+  setSelectedChord: (chord: Type) => void;
+};
 
 const screenWidth = document.documentElement.clientWidth;
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-    fontSize: screenWidth < 450 ? 14 : 18,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: screenWidth < 450 ? 14 : 18,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    backgroundColor: '#202020',
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
-
 const synth = new Tone.PolySynth().toDestination();
 
-function ChordFunctionContent() {
-  const [selectedNote, setSelectedNote] = useState<string>('C');
-  const [selectedChord, setSelectedChord] = useState<Type>('maj');
+function ChordFunctionContent({selectedNote, setSelectedNote, selectedChord, setSelectedChord}: ChordFunctionContentProps) {
+
 
   const displayMajorKeyChords = useMemo(() => {
     return MAJOR.filter((chord) => chord.type === selectedChord);
@@ -106,56 +85,16 @@ function ChordFunctionContent() {
       </InputRow>
       <div className={screenWidth < 450 ? styles.spWidth : styles.fullWidth}>
         <TableContainer sx={{width: screenWidth < 450 ? '640px' : '80%'}} >
-          <TableTitle>Major Key</TableTitle>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <StyledTableCell align="left" width={132}>Key</StyledTableCell>
-                <StyledTableCell align="left" width={180}>Degree Name</StyledTableCell>
-                <StyledTableCell align="left" width={180}>Function</StyledTableCell>
-                <StyledTableCell align="left" width={400}>Modality</StyledTableCell>
-                <StyledTableCell align="left" width={400}>Scale</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {displayMajorKeyChords.map((chord) => (
-                <StyledTableRow key={chord.degreeName}>
-                  <StyledTableCell scope="row">
-                    {getKey(chord.numberOfSeminotes)}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">{chord.degreeName}</StyledTableCell>
-                  <StyledTableCell align="left">{chord.function}</StyledTableCell>
-                  <StyledTableCell align="left">{chord.modality.join(', ')}</StyledTableCell>
-                  <StyledTableCell align="left">{chord.scales.join(', ')}</StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <TableTitle>Minor Key</TableTitle>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <StyledTableCell align="left" width={132}>Key</StyledTableCell>
-                <StyledTableCell align="left" width={180}>Degree Name</StyledTableCell>
-                <StyledTableCell align="left" width={180}>Function</StyledTableCell>
-                <StyledTableCell align="left" width={400}>Modality</StyledTableCell>
-                <StyledTableCell align="left" width={400}>Scale</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {displayMinorKeyChords.map((chord) => (
-                <StyledTableRow key={chord.degreeName}>
-                  <StyledTableCell scope="row">
-                    {getKey(chord.numberOfSeminotes)}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">{chord.degreeName}</StyledTableCell>
-                  <StyledTableCell align="left">{chord.function}</StyledTableCell>
-                  <StyledTableCell align="left">{chord.modality.join(', ')}</StyledTableCell>
-                  <StyledTableCell align="left">{chord.scales.join(', ')}</StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <ChordFunctionTable
+            title="Major Key"
+            chords={displayMajorKeyChords}
+            getKey={getKey}
+          />
+          <ChordFunctionTable
+            title="Minor Key"
+            chords={displayMinorKeyChords}
+            getKey={getKey}
+          />
         </TableContainer>
       </div>
     </>
