@@ -5,12 +5,15 @@ import { useState } from 'react';
 import ChordFunctionContent from '@/components/chord/ChordFunctionContent/ChordFunctionContent';
 import MajorKeyContent from '@/components/chord/MajorKeyContent/MajorKeyContent';
 import MinorKeyContent from '@/components/chord/MinorKeyContent/MinorKeyContent';
+import { Type } from '@/type/music/chord';
 
 
 const screenWidth = document.documentElement.clientWidth;
 
 function ChordContent() {
   const [value, setValue] = useState(0);
+  const [selectedNote, setSelectedNote] = useState<string>('C');
+  const [selectedChord, setSelectedChord] = useState<Type>('maj');
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -40,7 +43,14 @@ function ChordContent() {
         </Tabs>
       </Box> */}
       <div className={styles.tabContent}>
-        {value === 0 && <ChordFunctionContent />}
+        {value === 0 && (
+          <ChordFunctionContent
+            selectedNote={selectedNote}
+            setSelectedNote={setSelectedNote}
+            selectedChord={selectedChord}
+            setSelectedChord={setSelectedChord}
+          />
+        )}
         {value === 1 && <MajorKeyContent />}
         {value === 2 && <MinorKeyContent />}
       </div>
