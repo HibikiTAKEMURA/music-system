@@ -9,7 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useCallback, useMemo, useState } from 'react';
 import { Type } from '@/type/music/chord';
-import { MAJOR } from '@/constants/chord';
+import { MAJOR, MINOR } from '@/constants/chord';
 import { NOTES, TYPES } from '@/constants/music';
 import TableTitle from '@/components/atoms/TableTitle/TableTitle';
 import InputRow from '@/components/atoms/InputRow/InputRow';
@@ -52,7 +52,7 @@ function ChordFunctionContent() {
   }, [selectedChord]);
 
   const displayMinorKeyChords = useMemo(() => {
-    return MAJOR.filter((chord) => chord.type === selectedChord);
+    return MINOR.filter((chord) => chord.type === selectedChord);
   }, [selectedChord]);
 
   const selectedChordNotes = useMemo(() => {
@@ -110,11 +110,11 @@ function ChordFunctionContent() {
           <Table>
             <TableHead>
               <TableRow>
-                <StyledTableCell align="left">Key</StyledTableCell>
-                <StyledTableCell align="left">Degree Name</StyledTableCell>
-                <StyledTableCell align="left">Function</StyledTableCell>
-                <StyledTableCell align="left">Modality</StyledTableCell>
-                <StyledTableCell align="left">Scale</StyledTableCell>
+                <StyledTableCell align="left" width={132}>Key</StyledTableCell>
+                <StyledTableCell align="left" width={180}>Degree Name</StyledTableCell>
+                <StyledTableCell align="left" width={180}>Function</StyledTableCell>
+                <StyledTableCell align="left" width={400}>Modality</StyledTableCell>
+                <StyledTableCell align="left" width={400}>Scale</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -125,21 +125,21 @@ function ChordFunctionContent() {
                   </StyledTableCell>
                   <StyledTableCell align="left">{chord.degreeName}</StyledTableCell>
                   <StyledTableCell align="left">{chord.function}</StyledTableCell>
-                  <StyledTableCell align="left">{chord.modality}</StyledTableCell>
-                  <StyledTableCell align="left">{chord.scales}</StyledTableCell>
+                  <StyledTableCell align="left">{chord.modality.join(', ')}</StyledTableCell>
+                  <StyledTableCell align="left">{chord.scales.join(', ')}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
           </Table>
-          {/* <TableTitle>Minor Key</TableTitle>
+          <TableTitle>Minor Key</TableTitle>
           <Table>
             <TableHead>
               <TableRow>
-                <StyledTableCell align="left">Key</StyledTableCell>
-                <StyledTableCell align="left">Degree Name</StyledTableCell>
-                <StyledTableCell align="left">Function</StyledTableCell>
-                <StyledTableCell align="left">Modality</StyledTableCell>
-                <StyledTableCell align="left">Scale</StyledTableCell>
+                <StyledTableCell align="left" width={132}>Key</StyledTableCell>
+                <StyledTableCell align="left" width={180}>Degree Name</StyledTableCell>
+                <StyledTableCell align="left" width={180}>Function</StyledTableCell>
+                <StyledTableCell align="left" width={400}>Modality</StyledTableCell>
+                <StyledTableCell align="left" width={400}>Scale</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -150,12 +150,12 @@ function ChordFunctionContent() {
                   </StyledTableCell>
                   <StyledTableCell align="left">{chord.degreeName}</StyledTableCell>
                   <StyledTableCell align="left">{chord.function}</StyledTableCell>
-                  <StyledTableCell align="left">{chord.modality}</StyledTableCell>
-                  <StyledTableCell align="left">{chord.scales}</StyledTableCell>
+                  <StyledTableCell align="left">{chord.modality.join(', ')}</StyledTableCell>
+                  <StyledTableCell align="left">{chord.scales.join(', ')}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
-          </Table> */}
+          </Table>
         </TableContainer>
       </div>
     </>
