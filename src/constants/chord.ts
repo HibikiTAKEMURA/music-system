@@ -83,10 +83,10 @@ export const MAJOR: Chord[] = [
   },
   {
     numberOfSeminotes: 5,
-    degreeName: "IV",
+    degreeName: "IVmaj",
     function: "Sub Dominant",
     modality: ["Diatonic"],
-    type: " ",
+    type: "maj",
     scales: ["Lydian"]
   },
   {
@@ -246,10 +246,10 @@ export const MINOR: Chord[] = [
   },
   {
     numberOfSeminotes: 2,
-    degreeName: "IImb5",
+    degreeName: "IIdim",
     function: "Sub Dominant",
     modality: ["Natural Minor", "Harmonic Minor"],
-    type: "mb5",
+    type: "dim",
     scales: ["Locrian"]
   },
   {
