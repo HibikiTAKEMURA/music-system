@@ -1,11 +1,11 @@
-.note-select {
+.key-select {
     width: 64px;
     height: 42px;
     font-size: 16pt;
 }
 
-.type-select {
-    width: 108px;
+.function-select {
+    width: 208px;
     height: 42px;
     font-size: 16pt;
 }
@@ -21,14 +21,4 @@
 .sp-width {
     /* width: 800px; */
     overflow: auto;
-}
-
-.chord-notes {
-    text-align: center;
-    p {
-        margin: 0;
-        padding-top: 16px;
-        font-size: 32pt;
-        font-weight: bold;
-    }
 }

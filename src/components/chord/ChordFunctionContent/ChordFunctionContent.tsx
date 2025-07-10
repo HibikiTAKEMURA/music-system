@@ -1,6 +1,6 @@
 import styles from './ChordFunctionContent.module.css';
 import TableContainer from '@mui/material/TableContainer';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Type } from '@/type/music/chord';
 import { MAJOR, MINOR } from '@/constants/chord';
 import { NOTES, TYPES } from '@/constants/music';
@@ -18,13 +18,12 @@ type ChordFunctionContentProps = {
   setSelectedNote: (note: string) => void;
   selectedChord: Type;
   setSelectedChord: (chord: Type) => void;
+  synth: Tone.PolySynth<Tone.Synth<Tone.SynthOptions>>;
 };
 
 const screenWidth = document.documentElement.clientWidth;
-const synth = new Tone.PolySynth().toDestination();
 
-function ChordFunctionContent({selectedNote, setSelectedNote, selectedChord, setSelectedChord}: ChordFunctionContentProps) {
-
+function ChordFunctionContent({selectedNote, setSelectedNote, selectedChord, setSelectedChord, synth}: ChordFunctionContentProps) {
 
   const displayMajorKeyChords = useMemo(() => {
     return MAJOR.filter((chord) => chord.type === selectedChord);
@@ -76,6 +75,7 @@ function ChordFunctionContent({selectedNote, setSelectedNote, selectedChord, set
       <div className={styles.chordNotes}>
         <p>{selectedChordNotes}</p>
       </div>
+      <FormSpace />
       <InputRow>
         <InputBox>
           <PlayButtonStyle onClick={playChord}>
