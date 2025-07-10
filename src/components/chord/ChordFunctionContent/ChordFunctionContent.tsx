@@ -56,7 +56,7 @@ function ChordFunctionContent({selectedNote, setSelectedNote, selectedChord, set
       <InputRow>
         <InputBox>
           <InputLabel htmlFor='note'>Note</InputLabel>
-          <select className={styles.noteSelect} id='note' onChange={ (e) => setSelectedNote(e.target.value) }>
+          <select className={styles.noteSelect} id='note' defaultValue={selectedNote} onChange={ (e) => setSelectedNote(e.target.value) }>
             {NOTES.map((note) =>
               <option value={note} key={note}>{note}</option>
             )}
@@ -64,8 +64,8 @@ function ChordFunctionContent({selectedNote, setSelectedNote, selectedChord, set
         </InputBox>              
         <FormSpace />
         <InputBox>
-          <InputLabel htmlFor='scale'>Scale</InputLabel>
-          <select className={styles.typeSelect} id='scale' onChange={ (e) => setSelectedChord(e.target.value)}>
+          <InputLabel htmlFor='chord'>Scale</InputLabel>
+          <select className={styles.typeSelect} id='chord' defaultValue={selectedChord} onChange={ (e) => setSelectedChord(e.target.value)}>
             {TYPES.map((type) =>
               <option value={type} key={type}>{type}</option>
             )}
