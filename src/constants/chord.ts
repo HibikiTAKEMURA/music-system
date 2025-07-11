@@ -1,6 +1,6 @@
 import { Chord } from "@/type/music/chord";
 
-export const MAJOR: Chord[] = [
+export const MAJOR_4: Chord[] = [
   {
     numberOfSeminotes: 0,
     degreeName: "Imaj7",
@@ -57,6 +57,9 @@ export const MAJOR: Chord[] = [
     type: "m7b5",
     scales: ["Locrian"]
   },
+];
+
+export const MAJOR_3: Chord[] = [
   {
     numberOfSeminotes: 0,
     degreeName: "Imaj",
@@ -115,7 +118,7 @@ export const MAJOR: Chord[] = [
   }
 ];
 
-export const MINOR: Chord[] = [
+export const MINOR_4: Chord[] = [
   {
     numberOfSeminotes: 0,
     degreeName: "Im7",
@@ -236,6 +239,9 @@ export const MINOR: Chord[] = [
     type: "m7b5",
     scales: []
   },
+];
+
+export const MINOR_3: Chord[] = [
   {
     numberOfSeminotes: 0,
     degreeName: "Im",

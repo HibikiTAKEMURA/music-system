@@ -7,7 +7,7 @@ import { useCallback, useMemo } from "react";
 import { Chord } from "tonal";
 import * as Tone from 'tone'
 import styles from './AvailableChordContent.module.css';
-import { MAJOR, MINOR } from "@/constants/chord";
+import { MAJOR_3, MAJOR_4, MINOR_3, MINOR_4 } from "@/constants/chord";
 import AvailableChordTable from "@/components/chord/AvailableChordTable/AvailableChordTable";
 import FormSpace from "@/components/atoms/FormSpace/FormSpace";
 import { TableContainer } from "@mui/material";
@@ -24,16 +24,28 @@ type AvailableChordContentProps = {
 
 function AvailableChordContent({ selectedKey, setSelectedKey, synth, selectedFunction, setSelectedFunction }: AvailableChordContentProps) {
 
-  const displayMajorKeyChords = useMemo(() => {
+  const displayMajorKeyChords4 = useMemo(() => {
     return selectedFunction === ''
-      ? MAJOR
-      : MAJOR.filter((chord) => chord.function === selectedFunction);
+      ? MAJOR_4
+      : MAJOR_4.filter((chord) => chord.function === selectedFunction);
   }, [selectedFunction]);
 
-  const displayMinorKeyChords = useMemo(() => {
+  const displayMajorKeyChords3 = useMemo(() => {
     return selectedFunction === ''
-      ? MINOR
-      : MINOR.filter((chord) => chord.function === selectedFunction);
+      ? MAJOR_3
+      : MAJOR_3.filter((chord) => chord.function === selectedFunction);
+  }, [selectedFunction]);
+
+  const displayMinorKeyChords4 = useMemo(() => {
+    return selectedFunction === ''
+      ? MINOR_4
+      : MINOR_4.filter((chord) => chord.function === selectedFunction);
+  }, [selectedFunction]);
+
+  const displayMinorKeyChords3 = useMemo(() => {
+    return selectedFunction === ''
+      ? MINOR_3
+      : MINOR_3.filter((chord) => chord.function === selectedFunction);
   }, [selectedFunction]);
 
 
@@ -80,14 +92,26 @@ function AvailableChordContent({ selectedKey, setSelectedKey, synth, selectedFun
       <div className={screenWidth < 450 ? styles.spWidth : styles.fullWidth}>
         <TableContainer sx={{width: screenWidth < 450 ? '800px' : '80%'}} >
           <AvailableChordTable
-            title="Major Key Chords"
-            chords={displayMajorKeyChords}
+            title="Major Key Tetrad"
+            chords={displayMajorKeyChords4}
             getChordName={getChordName}
             playChord={playChord}
           />
           <AvailableChordTable
-            title="Minor Key Chords"
-            chords={displayMinorKeyChords}
+            title="Major Key Triad"
+            chords={displayMajorKeyChords3}
+            getChordName={getChordName}
+            playChord={playChord}
+          />
+          <AvailableChordTable
+            title="Minor Key Tetrad"
+            chords={displayMinorKeyChords4}
+            getChordName={getChordName}
+            playChord={playChord}
+          />
+          <AvailableChordTable
+            title="Minor Key Triad"
+            chords={displayMinorKeyChords3}
             getChordName={getChordName}
             playChord={playChord}
           />
