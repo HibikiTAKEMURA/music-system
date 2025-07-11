@@ -2,7 +2,7 @@ import styles from './ChordFunctionContent.module.css';
 import TableContainer from '@mui/material/TableContainer';
 import { useCallback, useMemo } from 'react';
 import { Type } from '@/type/music/chord';
-import { MAJOR, MINOR } from '@/constants/chord';
+import { MAJOR_3, MAJOR_4, MINOR_3, MINOR_4 } from '@/constants/chord';
 import { NOTES, TYPES } from '@/constants/music';
 import InputRow from '@/components/atoms/InputRow/InputRow';
 import InputBox from '@/components/atoms/InputBox/InputBox';
@@ -26,11 +26,11 @@ const screenWidth = document.documentElement.clientWidth;
 function ChordFunctionContent({selectedNote, setSelectedNote, selectedChord, setSelectedChord, synth}: ChordFunctionContentProps) {
 
   const displayMajorKeyChords = useMemo(() => {
-    return MAJOR.filter((chord) => chord.type === selectedChord);
+    return MAJOR_4.concat(MAJOR_3).filter((chord) => chord.type === selectedChord);
   }, [selectedChord]);
 
   const displayMinorKeyChords = useMemo(() => {
-    return MINOR.filter((chord) => chord.type === selectedChord);
+    return MINOR_4.concat(MINOR_3).filter((chord) => chord.type === selectedChord);
   }, [selectedChord]);
 
   const selectedChordNotes = useMemo(() => {
