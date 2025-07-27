@@ -75,7 +75,6 @@ function ChordFunctionContent({selectedNote, setSelectedNote, selectedChord, set
       <div className={styles.chordNotes}>
         <p>{selectedChordNotes}</p>
       </div>
-      <FormSpace />
       <InputRow>
         <InputBox>
           <PlayButtonStyle onClick={playChord}>
