@@ -1,11 +1,12 @@
-import Box from '@mui/material/Box';
+// import Box from '@mui/material/Box';
 import TableHead from '@mui/material/TableHead';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import { visuallyHidden } from '@mui/utils';
+// import TableSortLabel from '@mui/material/TableSortLabel';
+// import { visuallyHidden } from '@mui/utils';
 
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import { ScoreData } from '../../../type/api/ScoreData';
+import { ScoreData } from '@/type/api/ScoreData';
+
 
 type Order = 'asc' | 'desc';
 
@@ -45,20 +46,20 @@ const headCells: readonly HeadCell[] = [
     numeric: false,
     label: 'Last Updated',
   },
-  // {
-  //   id: 'irealUrl',
-  //   numeric: false,
-  //   label: 'iReal Data',
-  // },
+  {
+    id: 'irealUrl',
+    numeric: false,
+    label: 'iReal Data',
+  },
 ];
 
 export default function EnhancedTableHead(props: EnhancedTableProps) {
-  const { order, orderBy, onRequestSort } =
+  const { order, orderBy } =
     props;
-  const createSortHandler =
-    (property: keyof ScoreData) => (event: React.MouseEvent<unknown>) => {
-      onRequestSort(event, property);
-    };
+  // const createSortHandler =
+  //   (property: keyof ScoreData) => (event: React.MouseEvent<unknown>) => {
+  //     onRequestSort(event, property);
+  //   };
 
   return (
     <TableHead>
@@ -66,10 +67,11 @@ export default function EnhancedTableHead(props: EnhancedTableProps) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
+            align={headCell.numeric ? 'right' : headCell.id === 'irealUrl' ? 'center' : 'left'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-            <TableSortLabel
+            {headCell.label}
+            {/* <TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
@@ -80,7 +82,7 @@ export default function EnhancedTableHead(props: EnhancedTableProps) {
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </Box>
               ) : null}
-            </TableSortLabel>
+            </TableSortLabel> */}
           </TableCell>
         ))}
       </TableRow>

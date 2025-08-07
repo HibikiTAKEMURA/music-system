@@ -12,6 +12,7 @@ import { ScoreData } from '../../type/api/ScoreData';
 import { Order } from '../../type/utility/general';
 import { styled } from 'styled-components';
 import Container from '../atoms/Container';
+import PlayButtonStyle from '@/components/atoms/PlayButtonStyle/PlayButtonStyle';
 
 
 const screenWidth = document.documentElement.clientWidth;
@@ -153,7 +154,7 @@ export default function ScoreContent() {
         <h1>Scores</h1>
       </NoteStyle>
       <TableStyle>
-        <Paper sx={{ width: '1200px', mb: 2, padding: 3, overflow: 'auto' }}>
+        <Paper sx={{ width: '1250px', mb: 2, padding: 3, overflow: 'auto' }}>
           <EnhancedTableToolbar
             setSearchString={setSearchString}
             screenWidth={screenWidth}
@@ -184,14 +185,18 @@ export default function ScoreContent() {
                         id={labelId}
                         scope="row"
                         padding="none"
-                        sx={{ width: '150px', fontSize: '18px', fontWeight: 1000 }}
+                        sx={{ width: '150px', height: '72px', fontSize: '18px', fontWeight: 1000 }}
                       >
                         <a href={row.url} style={{ color: '#c1e4e9' }}>{row.title}</a>
                       </TableCell>
                       <TableCell align="left" sx={{ width: '150px', fontSize: '18px', color: '#ded5c0' }}>{row.composer}</TableCell>
                       <TableCell align="left" sx={{ width: '150px', fontSize: '18px', color: '#ded5c0' }}>{row.majorPlayers.join(", ")}</TableCell>
                       <TableCell align="left" sx={{ width: '150px', fontSize: '18px', color: '#ded5c0' }}>{formatDateString(row.lastUpdated)}</TableCell>
-                      {/* <TableCell align="right">{row.protein}</TableCell> */}
+                      <TableCell align="center">
+                        {row.irealUrl && (<PlayButtonStyle>
+                          <a href={row.irealUrl}>iReal</a>
+                        </PlayButtonStyle>)}
+                      </TableCell>
                     </TableRow>
                   );
                 })}

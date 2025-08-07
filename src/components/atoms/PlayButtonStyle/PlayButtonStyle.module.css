@@ -5,4 +5,10 @@
   vertical-align: middle;
   font-weight: 400;
   background-color: rgb(74, 22, 122);
+  color: white;
+  text-align: center;
+}
+
+.button-style a {
+  color: white;
 }
