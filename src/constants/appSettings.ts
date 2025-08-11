@@ -10,6 +10,14 @@ export const PAGE_URLS = {
   IREAL : 'ireal',
 };
 
+export const PAGE_TITLES = {
+  SCALE : 'Scale',
+  CHORD : 'Chord',
+  OSCILLATOR : 'Oscillator',
+  SCORE : 'Score',
+  IREAL : 'iReal Data',
+};
+
 export const URLS = [
   {
     url: BASE_URL + PAGE_URLS.SCALE,
@@ -29,7 +37,7 @@ export const URLS = [
   },
   {
     url: BASE_URL + PAGE_URLS.IREAL,
-    title: 'iReal',
+    title: 'iReal Data',
   },
 
 ];
