@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
-import '@/App.css'
-import styled from "styled-components"
+import { useEffect, useRef, useState } from 'react';
+import '@/App.css';
+import styled from "styled-components";
 
 import { Note } from "tonal";
-import * as Tone from 'tone'
+import * as Tone from 'tone';
 
 import { NOTES, OCTAVES, STANDARD_PITCH } from '@/constants/music';
 import Content from '@/components/atoms/Content';
@@ -168,58 +168,58 @@ const FrequencyContent = () => {
   };
   
 
-    return (
-        <Content>        
-          <NoteStyle>
-            <h1>
+  return (
+    <Content>        
+      <NoteStyle>
+        <h1>
               Oscillator
-            </h1>
-            <InputBox>
-              <PitchDisplay>{ nowPitch + 'Hz'}</PitchDisplay>
-              <InputPitch type="range" defaultValue={440} min={437} max={445} id="temp" name="temp" list="markers" onChange={(e) => setNowPitch(Number(e.target.value))} />
-              <datalist id="markers">
-                {STANDARD_PITCH.map((standardPitch) =>
-                  <option value={standardPitch} key={standardPitch}></option>
-                )}
-              </datalist>
-            </InputBox>
-            <FormSpaceV />
-            <InputRow>
-              <InputBox>
-                <InputLabel htmlFor='note'>Note</InputLabel>
-                <NoteSelectStyle id='note' onChange={ (e) => setNowNote(e.target.value) }>
-                  {NOTES.map((note) =>
-                    <option value={note} key={note}>{note}</option>
-                  )}
-                </NoteSelectStyle>
-              </InputBox>              
-              <FormSpace />
-              <InputBox>
-                <InputLabel htmlFor='octave'>Octave</InputLabel>
-                <OctaveSelectStyle id='octave' defaultValue={4} onChange={ (e) => setNowOctave(parseInt(e.target.value))}>
-                  {OCTAVES.map((octave) =>
-                    <option value={octave} key={octave}>{octave}</option>
-                  )}
-                </OctaveSelectStyle>
-              </InputBox>
-            </InputRow>
-            <FormSpaceV />
-            <NotesStringStyle>
-              <NotesStringDiv>
-                <p>{ 'Note Number: ' + nowNoteNum }</p>
-                <p>{ 'Frequency: ' + nowFrequency + 'Hz' }</p>
-              </NotesStringDiv>
-            </NotesStringStyle>
-            <InputRow>
-              <InputBox>
-                <PlayButtonStyle onClick={togglePlay} >
-                  { isPlaying ? 'Stop' : 'Play' }
-                </PlayButtonStyle>
-              </InputBox>
-            </InputRow>
-          </NoteStyle>
-        </Content>
-    );
+        </h1>
+        <InputBox>
+          <PitchDisplay>{ nowPitch + 'Hz'}</PitchDisplay>
+          <InputPitch type="range" defaultValue={440} min={437} max={445} id="temp" name="temp" list="markers" onChange={(e) => setNowPitch(Number(e.target.value))} />
+          <datalist id="markers">
+            {STANDARD_PITCH.map((standardPitch) =>
+              <option value={standardPitch} key={standardPitch}></option>
+            )}
+          </datalist>
+        </InputBox>
+        <FormSpaceV />
+        <InputRow>
+          <InputBox>
+            <InputLabel htmlFor='note'>Note</InputLabel>
+            <NoteSelectStyle id='note' onChange={ (e) => setNowNote(e.target.value) }>
+              {NOTES.map((note) =>
+                <option value={note} key={note}>{note}</option>
+              )}
+            </NoteSelectStyle>
+          </InputBox>              
+          <FormSpace />
+          <InputBox>
+            <InputLabel htmlFor='octave'>Octave</InputLabel>
+            <OctaveSelectStyle id='octave' defaultValue={4} onChange={ (e) => setNowOctave(parseInt(e.target.value))}>
+              {OCTAVES.map((octave) =>
+                <option value={octave} key={octave}>{octave}</option>
+              )}
+            </OctaveSelectStyle>
+          </InputBox>
+        </InputRow>
+        <FormSpaceV />
+        <NotesStringStyle>
+          <NotesStringDiv>
+            <p>{ 'Note Number: ' + nowNoteNum }</p>
+            <p>{ 'Frequency: ' + nowFrequency + 'Hz' }</p>
+          </NotesStringDiv>
+        </NotesStringStyle>
+        <InputRow>
+          <InputBox>
+            <PlayButtonStyle onClick={togglePlay} >
+              { isPlaying ? 'Stop' : 'Play' }
+            </PlayButtonStyle>
+          </InputBox>
+        </InputRow>
+      </NoteStyle>
+    </Content>
+  );
     
 };
 

@@ -7,7 +7,7 @@ type TableTitleProps = {
 export default function TableTitle({children}: TableTitleProps) {
   return (
     <p className={styles.tableTitle}>
-        {children}
+      {children}
     </p>
   );
 }

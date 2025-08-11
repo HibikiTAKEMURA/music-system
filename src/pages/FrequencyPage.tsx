@@ -3,11 +3,11 @@ import DefaultPage from "./DefaultPage";
 
 
 const FrequencyPage = () => {
-    return(
-        <DefaultPage>
-            <FrequencyContent />
-        </DefaultPage>
-    );
-}
+  return(
+    <DefaultPage>
+      <FrequencyContent />
+    </DefaultPage>
+  );
+};
 
 export default FrequencyPage;

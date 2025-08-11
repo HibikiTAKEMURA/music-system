@@ -8,7 +8,7 @@ type PlayButtonStyleProps = {
 export default function PlayButtonStyle({children, onClick}: PlayButtonStyleProps) {
   return (
     <button className={styles.buttonStyle} onClick={onClick}>
-        {children}
+      {children}
     </button>
   );
 }

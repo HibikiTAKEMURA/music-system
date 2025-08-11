@@ -7,7 +7,7 @@ type InputBoxProps = {
 export default function InputBox({children}: InputBoxProps) {
   return (
     <div className={styles.inputBox}>
-        {children}
+      {children}
     </div>
   );
 }

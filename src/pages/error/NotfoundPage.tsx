@@ -3,11 +3,11 @@ import DefaultPage from "../DefaultPage";
 
 
 const NotfoundPage = () => {
-    return(
-        <DefaultPage>
-            <NotfoundContent />
-        </DefaultPage>
-    );
-}
+  return(
+    <DefaultPage>
+      <NotfoundContent />
+    </DefaultPage>
+  );
+};
 
 export default NotfoundPage;

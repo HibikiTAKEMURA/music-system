@@ -8,28 +8,28 @@ type HeaderProps = {
 }
 
 const AppBar = styled(MuiAppBar)<AppBarProps>(({ theme }) => ({
-    zIndex: theme.zIndex.drawer + 1, // サイドメニューより前面に
+  zIndex: theme.zIndex.drawer + 1, // サイドメニューより前面に
 }));
 
 const Header:  React.FC<HeaderProps> = ({handleDrawer}) => {
-    return(
-        <AppBar position="fixed">
-            <Toolbar>
-                <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleDrawer}
-                    edge="start"
-                    sx={{ mr: 2 }}
-                >
-                    <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" noWrap component="div">
+  return(
+    <AppBar position="fixed">
+      <Toolbar>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawer}
+          edge="start"
+          sx={{ mr: 2 }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" noWrap component="div">
                     Music System
-                </Typography>
-            </Toolbar>
-        </AppBar>
-    );
+        </Typography>
+      </Toolbar>
+    </AppBar>
+  );
 };
 
 export default Header;

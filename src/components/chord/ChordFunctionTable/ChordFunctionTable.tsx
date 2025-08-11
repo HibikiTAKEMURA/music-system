@@ -23,7 +23,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(() => ({
-    backgroundColor: '#202020',
+  backgroundColor: '#202020',
   '&:last-child td, &:last-child th': {
     border: 0,
   },
@@ -32,33 +32,33 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 export default function ChordFunctionTable({title, chords, getKey}: ChordFunctionTableProps) {
 
-    return(
-        <>
-            <TableTitle>{title}</TableTitle>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell align="left" width={132}>Key</StyledTableCell>
-                        <StyledTableCell align="left" width={180}>Degree Name</StyledTableCell>
-                        <StyledTableCell align="left" width={180}>Function</StyledTableCell>
-                        <StyledTableCell align="left" width={400}>Modality</StyledTableCell>
-                        <StyledTableCell align="left" width={400}>Scale</StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {chords.map((chord) => (
-                        <StyledTableRow key={chord.degreeName}>
-                            <StyledTableCell scope="row">
-                            {getKey(chord.numberOfSeminotes)}
-                            </StyledTableCell>
-                            <StyledTableCell align="left">{chord.degreeName}</StyledTableCell>
-                            <StyledTableCell align="left">{chord.function}</StyledTableCell>
-                            <StyledTableCell align="left">{chord.modality.join(', ')}</StyledTableCell>
-                            <StyledTableCell align="left">{chord.scales.join(', ')}</StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </>
-    );
+  return(
+    <>
+      <TableTitle>{title}</TableTitle>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <StyledTableCell align="left" width={132}>Key</StyledTableCell>
+            <StyledTableCell align="left" width={180}>Degree Name</StyledTableCell>
+            <StyledTableCell align="left" width={180}>Function</StyledTableCell>
+            <StyledTableCell align="left" width={400}>Modality</StyledTableCell>
+            <StyledTableCell align="left" width={400}>Scale</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {chords.map((chord) => (
+            <StyledTableRow key={chord.degreeName}>
+              <StyledTableCell scope="row">
+                {getKey(chord.numberOfSeminotes)}
+              </StyledTableCell>
+              <StyledTableCell align="left">{chord.degreeName}</StyledTableCell>
+              <StyledTableCell align="left">{chord.function}</StyledTableCell>
+              <StyledTableCell align="left">{chord.modality.join(', ')}</StyledTableCell>
+              <StyledTableCell align="left">{chord.scales.join(', ')}</StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </>
+  );
 }

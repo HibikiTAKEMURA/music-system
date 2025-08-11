@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useState } from 'react'
-import '@/App.css'
-import styled from "styled-components"
+import { useCallback, useEffect, useState } from 'react';
+import '@/App.css';
+import styled from "styled-components";
 
 import { Scale } from "tonal";
-import * as Tone from 'tone'
+import * as Tone from 'tone';
 
 import abcjs from 'abcjs';
 import { NOTES, OCTAVES, SCALES } from '@/constants/music';
@@ -104,58 +104,58 @@ const ScaleContent = () => {
     scaleNotesArray.map((scaleNote, index)=>
       synth.triggerAttackRelease(scaleNote, "8n", now + noteLength * index)
     );
-    synth.triggerAttackRelease(nowNote + (nowOctave+1) , "8n", now + noteLength * scaleNotesArray.length)
+    synth.triggerAttackRelease(nowNote + (nowOctave+1) , "8n", now + noteLength * scaleNotesArray.length);
   }, [scaleNotesArray, nowNote, nowOctave]);
 
-    return (
-        <Content>        
-          <NoteStyle>
-            <h1>Scale</h1>
-            <InputRow>
-              <InputBox>
-                <InputLabel htmlFor='note'>Note</InputLabel>
-                <NoteSelectStyle id='note' onChange={ (e) => setNowNote(e.target.value) }>
-                  {NOTES.map((note) =>
-                    <option value={note} key={note}>{note}</option>
-                  )}
-                </NoteSelectStyle>
-              </InputBox>              
-              <FormSpace />
-              <InputBox>
-                <InputLabel htmlFor='scale'>Scale</InputLabel>
-                <ScaleSelectStyle id='scale' onChange={ (e) => setNowScale(e.target.value)}>
-                  {SCALES.map((scale) =>
-                    <option value={scale} key={scale}>{scale}</option>
-                  )}
-                </ScaleSelectStyle>
-              </InputBox>
-            </InputRow>
-            <NotesStringStyle>
-              <p>{ scaleNotesString }</p>
-            </NotesStringStyle>
-            <NotesStringStyle>
-              <NotesSheetStyle id="sheet-music"></NotesSheetStyle>
-            </NotesStringStyle>
-            <FormSpaceV />
-            <InputRow>
-              <InputBox>
-                <InputLabel htmlFor='octave'>Octave</InputLabel>
-                <OctaveSelectStyle id='octave' defaultValue={4} onChange={ (e) => setNowOctave(parseInt(e.target.value))}>
-                  {OCTAVES.map((octave) =>
-                    <option value={octave} key={octave}>{octave}</option>
-                  )}
-                </OctaveSelectStyle>
-              </InputBox>
-              <FormSpace />
-              <InputBox>
-                <PlayButtonStyle onClick={ playScale }>
+  return (
+    <Content>        
+      <NoteStyle>
+        <h1>Scale</h1>
+        <InputRow>
+          <InputBox>
+            <InputLabel htmlFor='note'>Note</InputLabel>
+            <NoteSelectStyle id='note' onChange={ (e) => setNowNote(e.target.value) }>
+              {NOTES.map((note) =>
+                <option value={note} key={note}>{note}</option>
+              )}
+            </NoteSelectStyle>
+          </InputBox>              
+          <FormSpace />
+          <InputBox>
+            <InputLabel htmlFor='scale'>Scale</InputLabel>
+            <ScaleSelectStyle id='scale' onChange={ (e) => setNowScale(e.target.value)}>
+              {SCALES.map((scale) =>
+                <option value={scale} key={scale}>{scale}</option>
+              )}
+            </ScaleSelectStyle>
+          </InputBox>
+        </InputRow>
+        <NotesStringStyle>
+          <p>{ scaleNotesString }</p>
+        </NotesStringStyle>
+        <NotesStringStyle>
+          <NotesSheetStyle id="sheet-music"></NotesSheetStyle>
+        </NotesStringStyle>
+        <FormSpaceV />
+        <InputRow>
+          <InputBox>
+            <InputLabel htmlFor='octave'>Octave</InputLabel>
+            <OctaveSelectStyle id='octave' defaultValue={4} onChange={ (e) => setNowOctave(parseInt(e.target.value))}>
+              {OCTAVES.map((octave) =>
+                <option value={octave} key={octave}>{octave}</option>
+              )}
+            </OctaveSelectStyle>
+          </InputBox>
+          <FormSpace />
+          <InputBox>
+            <PlayButtonStyle onClick={ playScale }>
                   Play
-                </PlayButtonStyle>
-              </InputBox>
-            </InputRow>
-          </NoteStyle>
-        </Content>
-    );
+            </PlayButtonStyle>
+          </InputBox>
+        </InputRow>
+      </NoteStyle>
+    </Content>
+  );
     
 };
 

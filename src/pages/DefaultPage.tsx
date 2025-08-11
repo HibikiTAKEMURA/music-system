@@ -1,4 +1,4 @@
-import '../App.css'
+import '../App.css';
 import Footer from '../components/atoms/Footer';
 import Container from '../components/atoms/Container';
 
@@ -36,19 +36,19 @@ const DefaultPage = (props: { children: React.ReactNode }) => {
   
   return (
     <Container>
-        <ThemeProvider theme={darkTheme}>
-            <Box sx={{ display: 'flex' }}>
-                <CssBaseline />
-                <Header handleDrawer={handleDrawer} />
-                <SideDrawer handleDrawer={handleDrawer} open={open} drawerWidth={drawerWidth} />
-                <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                </Box>
-            </Box>
-          {props.children}
-        </ThemeProvider>
-        <Footer />
+      <ThemeProvider theme={darkTheme}>
+        <Box sx={{ display: 'flex' }}>
+          <CssBaseline />
+          <Header handleDrawer={handleDrawer} />
+          <SideDrawer handleDrawer={handleDrawer} open={open} drawerWidth={drawerWidth} />
+          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          </Box>
+        </Box>
+        {props.children}
+      </ThemeProvider>
+      <Footer />
     </Container>
   );
-}
+};
 
 export default DefaultPage; 

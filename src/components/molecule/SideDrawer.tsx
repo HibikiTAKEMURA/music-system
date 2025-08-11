@@ -19,44 +19,44 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const SideDrawer:  React.FC<SideDrawerProps> = ({ handleDrawer, drawerWidth, open }) => {
-    const locationPath = useAtomValue(locationPathAtom);
-    return(
-        <Drawer
-            sx={{
-                width: drawerWidth,
-                flexShrink: 0,
-            }}
-            variant="temporary" // ページの上からメニューを開くためここを変更
-            anchor="left"
-            open={open}
-            onClose={handleDrawer} // 外側クリックで閉じる
-        >
-            <DrawerHeader>
-                {/* <IconButton onClick={handleDrawer}>
+  const locationPath = useAtomValue(locationPathAtom);
+  return(
+    <Drawer
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+      }}
+      variant="temporary" // ページの上からメニューを開くためここを変更
+      anchor="left"
+      open={open}
+      onClose={handleDrawer} // 外側クリックで閉じる
+    >
+      <DrawerHeader>
+        {/* <IconButton onClick={handleDrawer}>
                     {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                 </IconButton> */}
-            </DrawerHeader>
-            {/* <Divider /> */}
-            <List>
-                {URLS.map((url, index) => {
-                    return(
-                        <ListItem disablePadding key={index} >
-                            <ListItemButton
-                                href={url.url}
-                                onClick={() => {
-                                    handleDrawer();
-                                }}
-                                disabled={url.url === locationPath}
-                            >
-                                <ListItemText primary={url.title} />
-                            </ListItemButton>
-                        </ListItem>
-                    )
-                })}
-            </List>
-            <Divider />
-        </Drawer>
-    );
+      </DrawerHeader>
+      {/* <Divider /> */}
+      <List>
+        {URLS.map((url, index) => {
+          return(
+            <ListItem disablePadding key={index} >
+              <ListItemButton
+                href={url.url}
+                onClick={() => {
+                  handleDrawer();
+                }}
+                disabled={url.url === locationPath}
+              >
+                <ListItemText primary={url.title} />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+      </List>
+      <Divider />
+    </Drawer>
+  );
 };
 
 export default SideDrawer;

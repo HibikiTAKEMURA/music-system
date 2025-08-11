@@ -3,11 +3,11 @@ import DefaultPage from "@/pages/DefaultPage";
 
 
 const ScalePage = () => {
-    return(
-        <DefaultPage>
-            <ScaleContent />
-        </DefaultPage>
-    );
-}
+  return(
+    <DefaultPage>
+      <ScaleContent />
+    </DefaultPage>
+  );
+};
 
 export default ScalePage;

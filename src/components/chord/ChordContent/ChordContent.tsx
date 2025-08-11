@@ -1,11 +1,11 @@
-import '@/App.css'
-import styles from './ChordContent.module.css'
+import '@/App.css';
+import styles from './ChordContent.module.css';
 import { Box, Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
 import ChordFunctionContent from '@/components/chord/ChordFunctionContent/ChordFunctionContent';
 import { Type } from '@/type/music/chord';
 import AvailableChordContent from '@/components/chord/AvailableChordContent/AvailableChordContent';
-import * as Tone from 'tone'
+import * as Tone from 'tone';
 
 
 const screenWidth = document.documentElement.clientWidth;

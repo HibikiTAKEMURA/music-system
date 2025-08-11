@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import '../../App.css'
+import '../../App.css';
 import Container from '../atoms/Container';
 import Content from '../atoms/Content';
 import Footer from '../atoms/Footer';
@@ -10,21 +10,21 @@ const NotFoundContainer = styled.div`
 
 const NotfoundContent = () => {
 
-    return (
+  return (
     <>
-        <Container>
-            <Content>
-                <NotFoundContainer>
-                    <h1>ページが見つかりません</h1>
-                    <a className="read-the-docs" href="/music-system/#/home">
+      <Container>
+        <Content>
+          <NotFoundContainer>
+            <h1>ページが見つかりません</h1>
+            <a className="read-the-docs" href="/music-system/#/home">
                         ホームに戻る
-                    </a>
-                </NotFoundContainer>
-            </Content>
-            <Footer />
-        </Container>
+            </a>
+          </NotFoundContainer>
+        </Content>
+        <Footer />
+      </Container>
     </>
-    );
+  );
     
 };
 

@@ -3,11 +3,11 @@ import DefaultPage from "@/pages/DefaultPage";
 
 
 const IrealPage = () => {
-    return(
-        <DefaultPage>
-            <IrealContent />
-        </DefaultPage>
-    );
-}
+  return(
+    <DefaultPage>
+      <IrealContent />
+    </DefaultPage>
+  );
+};
 
 export default IrealPage;

@@ -9,7 +9,7 @@ import InputBox from '@/components/atoms/InputBox/InputBox';
 import InputLabel from '@/components/atoms/InputLabel/InputLabel';
 import FormSpace from '@/components/atoms/FormSpace/FormSpace';
 import PlayButtonStyle from '@/components/atoms/PlayButtonStyle/PlayButtonStyle';
-import * as Tone from 'tone'
+import * as Tone from 'tone';
 import { Chord } from "tonal";
 import ChordFunctionTable from '@/components/chord/ChordFunctionTable/ChordFunctionTable';
 

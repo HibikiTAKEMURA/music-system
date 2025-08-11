@@ -1,12 +1,12 @@
-import './App.css'
-import FrequencyPage from './pages/FrequencyPage'
-import { HashRouter, Route, Routes } from 'react-router'
-import ScalePage from './pages/ScalePage'
-import NotfoundPage from './pages/error/NotfoundPage'
-import { PAGE_URLS } from './constants/appSettings'
-import ScorePage from './pages/ScorePage'
-import ChordPage from '@/pages/ChordPage'
-import IrealPage from '@/pages/IrealPage'
+import './App.css';
+import FrequencyPage from './pages/FrequencyPage';
+import { HashRouter, Route, Routes } from 'react-router';
+import ScalePage from './pages/ScalePage';
+import NotfoundPage from './pages/error/NotfoundPage';
+import { PAGE_URLS } from './constants/appSettings';
+import ScorePage from './pages/ScorePage';
+import ChordPage from '@/pages/ChordPage';
+import IrealPage from '@/pages/IrealPage';
 
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
         <Route path="*" element={<NotfoundPage />} />
       </Routes>
     </HashRouter>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -3,11 +3,11 @@ import DefaultPage from "./DefaultPage";
 
 
 const ScalePage = () => {
-    return(
-        <DefaultPage>
-            <ScoreContent />
-        </DefaultPage>
-    );
-}
+  return(
+    <DefaultPage>
+      <ScoreContent />
+    </DefaultPage>
+  );
+};
 
 export default ScalePage;

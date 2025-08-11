@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "rm -rf dist docs && vite build && cp -r dist docs",
-    "lint": "eslint .",
+    "lint": "eslint --fix .",
     "preview": "vite preview",
     "rebuild": "vite build && rm -R docs && cp -r dist docs",
     "git": "git add . && git commit -m 'Your commit message here' && git push origin main"

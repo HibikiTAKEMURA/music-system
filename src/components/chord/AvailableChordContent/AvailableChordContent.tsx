@@ -5,7 +5,7 @@ import { FUNCTIONS, NOTES } from "@/constants/music";
 import { Type } from "@/type/music/chord";
 import { useCallback, useMemo } from "react";
 import { Chord } from "tonal";
-import * as Tone from 'tone'
+import * as Tone from 'tone';
 import styles from './AvailableChordContent.module.css';
 import { MAJOR_3, MAJOR_4, MINOR_3, MINOR_4 } from "@/constants/chord";
 import AvailableChordTable from "@/components/chord/AvailableChordTable/AvailableChordTable";
@@ -78,7 +78,7 @@ function AvailableChordContent({ selectedKey, setSelectedKey, synth, selectedFun
             )}
           </select>
         </InputBox>
-          <FormSpace />
+        <FormSpace />
         <InputBox>
           <InputLabel htmlFor='function'>Function</InputLabel>
           <select className={styles.functionSelect} id='function' defaultValue={selectedFunction} onChange={ (e) => setSelectedFunction(e.target.value) }>

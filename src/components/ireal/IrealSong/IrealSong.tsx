@@ -7,9 +7,9 @@ type IrealSongProps = {
 };
 
 export default function IrealSong({title, composer, url}: IrealSongProps) {
-    return (
-        <>
-            <h3 className={styles.song}><a href={url}>{title}</a> - {composer}<br/><br/></h3><br/>
-        </>
-    );
+  return (
+    <>
+      <h3 className={styles.song}><a href={url}>{title}</a> - {composer}<br/><br/></h3><br/>
+    </>
+  );
 }

@@ -7,7 +7,7 @@ type InputRowProps = {
 export default function InputRow({children}: InputRowProps) {
   return (
     <div className={styles.inputRow}>
-        {children}
+      {children}
     </div>
   );
 }
