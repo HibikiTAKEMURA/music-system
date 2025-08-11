@@ -28,13 +28,16 @@ export default function IrealContent() {
             <div className={styles.topSpacer}></div>
             <h2>iReal Data</h2>
             {
-                rows.filter((row) => {return Boolean(row.irealUrl)}).map((row, index) => (
-                    <IrealSong
-                        key={index}
-                        title={row.title}
-                        composer={row.composer}
-                        url={row.irealUrl!}
-                    />
+            rows
+                .filter((row) => Boolean(row.irealUrl))
+                .sort((a, b) => a.title.localeCompare(b.title))
+                .map((row, index) => (
+                <IrealSong
+                    key={index}
+                    title={row.title}
+                    composer={row.composer}
+                    url={row.irealUrl!}
+                />
                 ))
             }
             <IrealContentFooter />
