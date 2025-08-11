@@ -9,10 +9,10 @@
 
 .body h2 {
     margin: 0;
-    padding: 32px 0;
-    font-size: 32px;
+    padding: 32px 0 48px;
+    font-size: 36px;
 }
 
 .top-spacer {
-    height: 100px;
+    height: 48px;
 }
