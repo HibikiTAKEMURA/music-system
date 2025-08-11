@@ -7,6 +7,7 @@ export const PAGE_URLS = {
     CHORD : 'chord',
     OSCILLATOR : 'frequency',
     SCORE : 'score',
+    IREAL : 'ireal',
 };
 
 export const URLS = [
@@ -26,4 +27,9 @@ export const URLS = [
         url: BASE_URL + PAGE_URLS.SCORE,
         title: 'Score',
     },
+    {
+        url: BASE_URL + PAGE_URLS.IREAL,
+        title: 'iReal',
+    },
+
 ];

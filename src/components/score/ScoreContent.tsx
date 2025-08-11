@@ -13,6 +13,9 @@ import { Order } from '../../type/utility/general';
 import { styled } from 'styled-components';
 import Container from '../atoms/Container';
 import PlayButtonStyle from '@/components/atoms/PlayButtonStyle/PlayButtonStyle';
+import getScoreData from '@/helper/getScoreData';
+import { useAtom } from 'jotai';
+import { scoreDataAtom } from '@/jotais/default';
 
 
 const screenWidth = document.documentElement.clientWidth;
@@ -60,7 +63,7 @@ export default function ScoreContent() {
   const [selected] = React.useState<readonly number[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [rows, setRows] = React.useState<ScoreData[]>([]);
+  const [rows, setRows] = useAtom(scoreDataAtom);
   const [searchString, setSearchString] = React.useState<string>('');
   const [visibleRows, setVisibleRows] = React.useState<ScoreData[]>([]);
   const [sortedRowLength, setSortedRowLength] = React.useState(0);
@@ -124,28 +127,17 @@ export default function ScoreContent() {
   }, [setPage, searchString]);
 
   React.useEffect(() => {
-    // POST リクエストを送信する関数
-    const sendPostRequest = async () => {
-      try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbxm1wcpNCgnVgZF-PvppnNvRwHyDu1apRCKBeUtG3decpidDqn6cjz421TvjlCAS5Cn/exec", {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain',
-          },
-          body: JSON.stringify({ key: "value" }), // 必要なデータをJSON形式で送る
-        });
-
-        // レスポンスをJSON形式で取得
-        response.json().then((data) => {
-          setRows(data);
-          setOrder('asc');
-        });
-      } catch (error) {
-        console.error("Error:", error);
+    if (rows.length !== 0) {
+      return; // 既にデータがある場合は再取得しない
+    }
+    getScoreData().then((data) => {
+      if (data) {
+        setRows(data);
+        setOrder('asc');
+      } else {
+        console.error('Failed to fetch score data');
       }
-    };
-
-    sendPostRequest(); // 関数を呼び出す
+    });
   }, []);
 
   return (
