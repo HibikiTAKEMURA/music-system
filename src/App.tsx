@@ -6,6 +6,7 @@ import NotfoundPage from './pages/error/NotfoundPage'
 import { PAGE_URLS } from './constants/appSettings'
 import ScorePage from './pages/ScorePage'
 import ChordPage from '@/pages/ChordPage'
+import IrealPage from '@/pages/IrealPage'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path={PAGE_URLS.OSCILLATOR} element={<FrequencyPage />} />
         <Route path={PAGE_URLS.SCORE} element={<ScorePage />} />
         <Route path={PAGE_URLS.CHORD} element={<ChordPage />} />
+        <Route path={PAGE_URLS.IREAL} element={<IrealPage />} />
         {/* <Route path="/table" element={<TablePage />} /> */}
         <Route path="*" element={<NotfoundPage />} />
       </Routes>
