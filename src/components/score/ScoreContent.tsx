@@ -58,7 +58,7 @@ const NoteStyle = styled.div`
 `;
 
 export default function ScoreContent() {
-  const [order, setOrder] = React.useState<Order>('desc');
+  const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof ScoreData>('title');
   const [selected] = React.useState<readonly number[]>([]);
   const [page, setPage] = React.useState(0);
