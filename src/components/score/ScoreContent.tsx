@@ -16,6 +16,7 @@ import PlayButtonStyle from '@/components/atoms/PlayButtonStyle/PlayButtonStyle'
 import getScoreData from '@/helper/getScoreData';
 import { useAtom } from 'jotai';
 import { scoreDataAtom } from '@/jotais/default';
+import { useLocation } from 'react-router';
 
 
 const screenWidth = document.documentElement.clientWidth;
@@ -58,13 +59,15 @@ const NoteStyle = styled.div`
 `;
 
 export default function ScoreContent() {
+  const search = useLocation().search;
+  const query = new URLSearchParams(search);
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof ScoreData>('title');
   const [selected] = React.useState<readonly number[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = useAtom(scoreDataAtom);
-  const [searchString, setSearchString] = React.useState<string>('');
+  const [searchString, setSearchString] = React.useState<string>(query.get('title') ?? '');
   const [visibleRows, setVisibleRows] = React.useState<ScoreData[]>([]);
   const [sortedRowLength, setSortedRowLength] = React.useState(0);
 
@@ -150,6 +153,7 @@ export default function ScoreContent() {
           <EnhancedTableToolbar
             setSearchString={setSearchString}
             screenWidth={screenWidth}
+            searchString={searchString}
           />
           <TableContainer>
             <Table
