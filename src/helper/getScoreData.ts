@@ -15,6 +15,7 @@ const getScoreData = async () => {
     return data;
         
   } catch (error) {
+    console.error(error);
     return false; // エラーが発生した場合はfalseを返す
   }
 };

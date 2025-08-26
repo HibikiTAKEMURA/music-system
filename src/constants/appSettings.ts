@@ -21,23 +21,23 @@ export const PAGE_TITLES = {
 export const URLS = [
   {
     url: BASE_URL + PAGE_URLS.SCALE,
-    title: 'Scale',
+    title: PAGE_TITLES.SCALE,
   },
   {
     url: BASE_URL + PAGE_URLS.CHORD,
-    title: 'Chord',
+    title: PAGE_TITLES.CHORD,
   },
   {
     url: BASE_URL + PAGE_URLS.OSCILLATOR,
-    title: 'Oscillator',
+    title: PAGE_TITLES.OSCILLATOR,
   },
   {
     url: BASE_URL + PAGE_URLS.SCORE,
-    title: 'Score',
+    title: PAGE_TITLES.SCORE,
   },
   {
     url: BASE_URL + PAGE_URLS.IREAL,
-    title: 'iReal Data',
+    title: PAGE_TITLES.IREAL,
   },
 
 ];
