@@ -8,6 +8,7 @@ export const PAGE_URLS = {
   OSCILLATOR : 'frequency',
   SCORE : 'score',
   IREAL : 'ireal',
+  SET_LIST_SORT : 'setListSort',
 };
 
 export const PAGE_TITLES = {
@@ -16,6 +17,7 @@ export const PAGE_TITLES = {
   OSCILLATOR : 'Oscillator',
   SCORE : 'Score',
   IREAL : 'iReal Data',
+  SET_LIST_SORT : 'Set List Sort',
 };
 
 export const URLS = [
@@ -38,6 +40,10 @@ export const URLS = [
   {
     url: BASE_URL + PAGE_URLS.IREAL,
     title: PAGE_TITLES.IREAL,
+  },
+  {
+    url: BASE_URL + PAGE_URLS.SET_LIST_SORT,
+    title: PAGE_TITLES.SET_LIST_SORT,
   },
 
 ];
