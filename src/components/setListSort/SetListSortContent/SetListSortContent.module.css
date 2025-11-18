@@ -1,0 +1,17 @@
+.body {
+    color: rgb(230, 227, 218);
+    background-color: rgb(27, 39, 48);
+    font-family: Helvetica,Arial,sans-serif;
+    min-height: calc(100vh - 116px);
+    text-align: center;
+}
+
+.body h2 {
+    margin: 0;
+    padding: 32px 0 48px;
+    font-size: 36px;
+}
+
+.top-spacer {
+    height: 48px;
+}
