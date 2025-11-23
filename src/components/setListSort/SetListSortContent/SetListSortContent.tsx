@@ -1,6 +1,6 @@
 import SetListSortTextInput from '@/components/setListSort/SetListSortTextInput/SetListSortTextInput';
 import styles from './SetListSortContent.module.css';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import DndArea from '@/components/setListSort/DndErea/DndArea';
 
 export default function SetListSortContent() {
@@ -19,7 +19,9 @@ export default function SetListSortContent() {
     <div className={styles.topSpacer}></div>
     <h2>Set List Sort</h2>
     <SetListSortTextInput onChange={handleChange}/>
-    <DndArea items={titles} />
+    <div className={styles.dndArea}>
+      <DndArea items={titles} />
+    </div>
   </div>
   );
 }

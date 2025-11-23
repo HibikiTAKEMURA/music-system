@@ -1,4 +1,4 @@
-import styles from './SetListSortTextInput.module.css';
+import styles from './SongTitleContent.module.css';
 
 const screenWidth = document.documentElement.clientWidth;
 type SongTitleContentProps = {
@@ -9,6 +9,8 @@ export default function SongTitleContent({ title }: SongTitleContentProps) {
     const className = screenWidth <= 400 ? styles.body + ' ' + styles.bodySp : styles.body;
 
     return (
-        <p className={className}>{title}</p>
+        <div className={className}>
+            <p>{title}</p>
+        </div>
     );
 }

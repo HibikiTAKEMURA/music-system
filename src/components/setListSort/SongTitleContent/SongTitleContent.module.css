@@ -1,10 +1,11 @@
 .body {
-    resize: none;
     width: 800px;
     font-size: 24px;
+    text-align: center;
 }
 
 .body-sp {
     font-size: 20px;
     width: 80%;
+    text-align: left;
 }
