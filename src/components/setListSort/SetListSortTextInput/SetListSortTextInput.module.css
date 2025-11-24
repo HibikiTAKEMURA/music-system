@@ -1,0 +1,11 @@
+.body {
+    resize: none;
+    width: 800px;
+    height: 200px;
+    font-size: 24px;
+}
+
+.body-sp {
+    font-size: 20px;
+    width: 80%;
+}
