@@ -1,12 +1,12 @@
 .body {
-    width: 800px;
+    width: 100%;
     font-size: 28px;
     text-align: center;
+    touch-action: none;
 }
 
 .body-sp {
     font-size: 20px;
-    width: 80%;
     text-align: left;
 }
 
